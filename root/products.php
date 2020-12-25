@@ -25,7 +25,7 @@
     <title>Price Page</title>
 </head>
 
-<body data-new-gr-c-s-check-loaded="8.867.0" id="pagebody">
+<body data-new-gr-c-s-check-loaded="8.867.0" id="page-body">
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
@@ -58,20 +58,21 @@
     <!-- ======= Products Section ======= -->
     <section id="work" class="portfolio-mf sect-pt4 route">
         <div class="container">
-            <div class="row  animate__animated animate__fadeInDown">
+            <div class="row animate__animated animate__fadeInDown">
                 <div class="col-sm-12">
                     <div class="price-box">
                         <div class="title-box text-center">
                             <h3 class="title-a">
                                 Products
                             </h3>
-                            <form action="" class="search-bar">
-                                <input type="search" name="search" pattern=".*\S.*" required>
-                                <button class="search-btn" type="submit">
-                                    <span>Search</span>
+                            <div class="searchBox d-flex align-items-center">
+                                <input class="searchInput" type="text" name="" placeholder="Search">
+                                <button class="searchButton" href="#">
+                                    <i class="material-icons">
+                                        search
+                                    </i>
                                 </button>
-                            </form>
-                            <div class="line-mf"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
