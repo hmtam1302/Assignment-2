@@ -37,7 +37,7 @@
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link nav-link-hover">Home</a>
+                        <a href="home.html" class="nav-link nav-link-hover">Home</a>
                     </li>
                     <li class="nav-item">
                         <a href="about.html" class="nav-link nav-link-hover">About</a>
