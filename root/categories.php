@@ -40,19 +40,19 @@
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link nav-link-hover">Home</a>
+                        <a href="index.php" class="nav-link nav-link-hover">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="about.html" class="nav-link nav-link-hover">About</a>
+                        <a href="about.php" class="nav-link nav-link-hover">About</a>
                     </li>
                     <li class="nav-item">
-                        <a href="categories.html" class="nav-link nav-link-hover active-item">Categories</a>
+                        <a href="categories.php" class="nav-link nav-link-hover active-item">Categories</a>
                     </li>
                     <li class="nav-item">
                         <a href="products.php" class="nav-link nav-link-hover">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a href="contact.html" class="nav-link nav-link-hover">Contact</a>
+                        <a href="contact.php" class="nav-link nav-link-hover">Contact</a>
                     </li>
                 </ul>
             </div>
