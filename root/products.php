@@ -30,9 +30,8 @@
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
             <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
-            <a href="index.html" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
-                    class="material-icons" id="nav-icon">menu</i></button>
+            <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
@@ -64,11 +63,14 @@
                     <div class="price-box">
                         <div class="title-box text-center">
                             <h3 class="title-a">
-                                Price Details
-                            </h3>
-                            <p class="subtitle-a">
                                 Products
-                            </p>
+                            </h3>
+                            <form action="" class="search-bar">
+                                <input type="search" name="search" pattern=".*\S.*" required>
+                                <button class="search-btn" type="submit">
+                                    <span>Search</span>
+                                </button>
+                            </form>
                             <div class="line-mf"></div>
                         </div>
                     </div>
@@ -78,58 +80,58 @@
 
             <!-- ======= Get Url Image from Database ======= -->
             <div class="row">
-            <?php
-            define('DB_HOST', 'localhost'); 
-            define('DB_NAME', 'assignment2'); 
-            define('DB_USER','root'); 
-            define('DB_PASSWORD',''); 
-            
-            $con=mysqli_connect(DB_HOST,DB_USER,'',DB_NAME) ; 
-            
-            $database="select * from product";
-            $record=mysqli_query($con,$database);
-            while ($row =mysqli_fetch_assoc($record))
-            {  $path= $row['url'];
-                $name=$row['name'];
-                $author=$row['author'];
-                $type=$row['type'];
-            ?>
-           
-          
-          
-                <div class="col-md-4 ">
-                    <div class="work-box animate__animated animate__fadeInLeftBig">
-                        <a href="" data-gall="portfolioGallery" class="venobox">
-                            <div class="work-img">
-                            <?php echo '<img src="'.$path.'" alt="" class="img-fluid">' ?>
-                         
-                            </div>
-                        </a>
-                        <div class="work-content">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <h2 class="w-title"><?php echo $name ?></h2>
-                                    <p>Author: <?php echo $author ?></p>
-                                    <p>Description: <?php echo $type ?></p>
-                                    <div class="w-more">
-                                        <span class="w-ctegory">Price</span> - <span class="w-date">15$</span>
-                                    </div>
+                <?php
+                define('DB_HOST', 'localhost');
+                define('DB_NAME', 'assignment2');
+                define('DB_USER', 'root');
+                define('DB_PASSWORD', '');
+
+                $con = mysqli_connect(DB_HOST, DB_USER, '', DB_NAME);
+
+                $database = "select * from product";
+                $record = mysqli_query($con, $database);
+                while ($row = mysqli_fetch_assoc($record)) {
+                    $path = $row['url'];
+                    $name = $row['name'];
+                    $author = $row['author'];
+                    $type = $row['type'];
+                ?>
+
+
+
+                    <div class="col-md-4 ">
+                        <div class="work-box animate__animated animate__fadeInLeftBig">
+                            <a href="" data-gall="portfolioGallery" class="venobox">
+                                <div class="work-img">
+                                    <?php echo '<img src="' . $path . '" alt="" class="img-fluid">' ?>
+
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="w-like">
-                                        <a href="portfolio-details.html"> <span class="ion-ios-plus-outline"></span></a>
+                            </a>
+                            <div class="work-content">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <h2 class="w-title"><?php echo $name ?></h2>
+                                        <p>Author: <?php echo $author ?></p>
+                                        <p>Description: <?php echo $type ?></p>
+                                        <div class="w-more">
+                                            <span class="w-ctegory">Price</span> - <span class="w-date">15$</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="w-like">
+                                            <a href="portfolio-details.html"> <span class="ion-ios-plus-outline"></span></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                   
-                </div>
-            <?php
-            }
-            ?>
-               
-                              
+                <?php
+                }
+                ?>
+
+
             </div>
         </div>
     </section>

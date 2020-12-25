@@ -29,7 +29,7 @@
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
             <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
-            <a href="index.html" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
+            <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
             <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
                     class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
@@ -75,7 +75,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <input type="text" name="name" class="form-control animate__animated"
+                                                            <input type="text" name="name" class="form-control"
                                                                 id="name" placeholder="Your Name" data-rule="minlen:4"
                                                                 data-msg="Please enter at least 4 chars">
                                                             <div class="validate" id="validateName"></div>
