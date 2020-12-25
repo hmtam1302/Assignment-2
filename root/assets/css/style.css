@@ -1,6 +1,6 @@
-
 @import url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 
 :root {
@@ -57,8 +57,8 @@ a:hover {
   position: relative;
 }
 .login-btn::after {
-  content: "\f2f6";
-  font-family: "Font Awesome 5 Pro";
+  content: "\f101";
+  font-family: "FontAwesome";
   font-weight: 400;
   position: absolute;
   left: 80%;
