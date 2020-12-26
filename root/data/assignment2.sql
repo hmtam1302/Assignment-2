@@ -32,3 +32,16 @@ insert INTO product(name,author,type,url) values("Dark Space","Author name","Nov
 insert INTO product(name,author,type,url) values("Harry Potter and the Philosopher's Stone","J.L.Rowling","Novel","assets/img/work-20.jpg");
 insert INTO product(name,author,type,url) values("Tess of the Road","Rachel Hartman","Novel","assets/img/work-21.jpg");
 
+
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (id, username, password) VALUES
+(1,'tri.hobknetid','123456'),
+(2,'tinh.hoangbknetid','123456');
