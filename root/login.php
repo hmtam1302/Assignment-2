@@ -158,17 +158,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group">
                             <input type="text" name="username" class="form-control animate__animated" id="username"
                                 placeholder="Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate" id="validateName"></div>
+
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control animate__animated" name="email" id="email"
                                 placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-                            <div class="validate" id="validateEmail"></div>
+
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control animate__animated" id="password"
                                 placeholder="Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate" id="validateName"></div>
+
                         </div>
                         <button class="btn btn-outline-primary btn-rounded px-5">Sign Up</button>
                     </form>
@@ -181,14 +181,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="text" name="username" class="form-control animate__animated" id="username"
                                 placeholder="Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
                                 value="<?php echo $username; ?>"> <!-- fix -->
-                            <span class="help-block"><?php echo $username_err; ?></span> <!-- fix -->
-                            <div class="validate" id="validateName"></div>
+                            <span class="help-block text-danger"><?php echo $username_err; ?></span> <!-- fix -->
+
                         </div>
                         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>"> <!-- fix -->
                             <input type="password" name="password" class="form-control animate__animated" id="password"
                                 placeholder="Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <span class="help-block"><?php echo $password_err; ?></span> <!-- fix -->
-                            <div class="validate" id="validateName"></div>
+                            <span class="help-block text-danger"><?php echo $password_err; ?></span> <!-- fix -->
+
                         </div>
                         <a href="#" class="my-2">Forgot your password?</a>
                         <button class="btn btn-outline-primary btn-rounded px-5">Sign In</button>
