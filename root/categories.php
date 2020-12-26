@@ -36,8 +36,8 @@
             <div>
                 <?php
                 session_start();
-                if (session_status() === PHP_SESSION_NONE) {
-                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
+                if (!isset($_SESSION['username'])) {
+                    echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
                 } else {
                     echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
                 }
@@ -45,7 +45,6 @@
             </div>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
             <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
-            <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
                     <li class="nav-item">
@@ -161,10 +160,14 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
     <!-- End Services Section -->
+    <?php
+    if (isset($_SESSION['username'])) {
+        echo '<button class="btn btn-primary float" onclick="logout()"><i class="fa fa-arrow-right"></i></button>';
+    }
+    ?>
     <!--Preloader-->
     <div id="preloader"></div>
 </body>

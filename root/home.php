@@ -13,7 +13,7 @@
     <!--Font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
 
     <!--Style file-->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -31,20 +31,18 @@
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
             <div>
-            <?php
+                <?php
                 session_start();
-                if (session_status() === PHP_SESSION_NONE){
-                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
-                }
-                else{
+                if (!isset($_SESSION['username'])) {
+                    echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
+                } else {
                     echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
                 }
-            ?>
+                ?>
             </div>
-            
+
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
             <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
-            <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
                     <li class="nav-item">
@@ -76,6 +74,11 @@
                 <span class="wrap">Huỳnh Công Hải</span>
             </p>
         </div>
+        <?php
+        if (isset($_SESSION['username'])) {
+            echo '<button class="btn btn-primary float" onclick="logout()"><i class="fa fa-arrow-right"></i></button>';
+        }
+        ?>
     </div>
     <!--Preloader-->
     <div id="preloader"></div>

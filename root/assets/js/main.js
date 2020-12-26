@@ -184,9 +184,21 @@ $(window).on('load', function () {
 
 
 
-function directInformation(){
-    // xmlhttp = new XMLHttpRequest();
-    // xmlhttp.open("GET", "config.php?action=information", true);
-    // xmlhttp.send();
+function directInformation() {
     window.location.href = "user.php";
+}
+
+function directLogin() {
+    window.location.href = "login.php";
+}
+
+function logout() {
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "config.php?action=logout", true);
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.href = this.responseText;
+        }
+    };
+    xmlhttp.send();
 }

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    
+
 
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -34,8 +34,8 @@
             <div>
                 <?php
                 session_start();
-                if (session_status() === PHP_SESSION_NONE) {
-                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
+                if (!isset($_SESSION['username'])) {
+                    echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
                 } else {
                     echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
                 }
@@ -43,7 +43,6 @@
             </div>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
             <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
-            <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
                     <li class="nav-item">
@@ -148,6 +147,11 @@
         </div>
     </section>
     <!-- End Portfolio Section -->
+    <?php
+    if (isset($_SESSION['username'])) {
+        echo '<button class="btn btn-primary float" onclick="logout()"><i class="fa fa-arrow-right"></i></button>';
+    }
+    ?>
     <!--Back to to-->
     <a href="#page-body" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
     <!--Preloader-->

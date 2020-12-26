@@ -142,7 +142,7 @@ a:hover {
   border-radius: 25rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   #projectName {
     font-size: 1.5rem;
     color: var(--color-active);
@@ -204,6 +204,13 @@ a:hover {
   }
 }
 
+@media screen and (min-width: 768px){
+    #navbarDefault ul {
+        display: flex;
+        flex-direction: row;
+      }
+}
+
 @media screen and (min-width: 769px) {
   #mainNav #projectName {
     margin-left: 100px;
@@ -211,6 +218,7 @@ a:hover {
   #mainNav #nav-icon {
     display: none;
   }
+  
 }
 
 /*----------Intro section----------*/
@@ -945,6 +953,10 @@ input {
   z-index: 11;
 }
 
+.back-to-top:hover{
+    background-color: #2100db;
+}
+
 .back-to-top i {
   padding-top: 12px;
   color: #fff;
@@ -1050,4 +1062,21 @@ input {
   100% {
     transform: rotate(360deg);
   }
+}
+
+
+/*Logout button*/
+.float{
+	position:fixed;
+	width:44px;
+	height:44px;
+	bottom:70px;
+    right:15px;
+	color:#FFF;
+	border-radius:50px;
+    text-align:center;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    margin: 0;
 }
