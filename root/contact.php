@@ -142,10 +142,10 @@
                                         </div>
                                         <div class="socials">
                                             <ul>
-                                                <li><a href="https://www.facebook.com/"><span class="ico-circle"><i class="fa fa-facebook-f"></i></span></a></li>
-                                                <li><a href="https://www.instagram.com/"><span class="ico-circle"><i class="fa fa-instagram"></i></span></a></li>
-                                                <li><a href="https://twitter.com/"><span class="ico-circle"><i class="fa fa-twitter"></i></span></a></li>
-                                                <li><a href="https://pinterest.com/"><span class="ico-circle"><i class="fa fa-pinterest-p"></i></span></a></li>
+                                                <li><a href="https://www.facebook.com/"><span class="ico-circle"><i class="fab fa-facebook-f"></i></span></a></li>
+                                                <li><a href="https://www.instagram.com/"><span class="ico-circle"><i class="fab fa-instagram"></i></span></a></li>
+                                                <li><a href="https://twitter.com/"><span class="ico-circle"><i class="fab fa-twitter"></i></span></a></li>
+                                                <li><a href="https://pinterest.com/"><span class="ico-circle"><i class="fab fa-pinterest-p"></i></span></a></li>
                                             </ul>
                                         </div>
                                     </div>
