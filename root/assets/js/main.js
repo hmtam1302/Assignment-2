@@ -184,3 +184,9 @@ $(window).on('load', function () {
 
 
 
+function directInformation(){
+    // xmlhttp = new XMLHttpRequest();
+    // xmlhttp.open("GET", "config.php?action=information", true);
+    // xmlhttp.send();
+    window.location.href = "user.php";
+}

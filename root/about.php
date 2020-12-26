@@ -17,6 +17,7 @@
     <!--Style file-->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -28,10 +29,18 @@
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
+            <div>
+                <?php
+                session_start();
+                if (session_status() === PHP_SESSION_NONE) {
+                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
+                } else {
+                    echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
+                }
+                ?>
+            </div>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
-                    class="material-icons" id="nav-icon">menu</i></button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
@@ -57,8 +66,7 @@
     <!--Abput section-->
     <section id="about" class="section sect-pt4 d-flex flex-column align-items-center mt-4">
         <!--Item 1-->
-        <div
-            class="container d-flex justify-content-center align-items-center section-mt-10 animate__animated animate__fadeInLeftBig">
+        <div class="container d-flex justify-content-center align-items-center section-mt-10 animate__animated animate__fadeInLeftBig">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="box-shadow-full">
@@ -67,8 +75,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-5">
                                         <div class="about-img">
-                                            <img src="assets/img/testimonial-1.jpg" class="img-fluid rounded b-shadow-a"
-                                                alt="">
+                                            <img src="assets/img/testimonial-1.jpg" class="img-fluid rounded b-shadow-a" alt="">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-7">
@@ -86,23 +93,19 @@
                                     <p class="title-s">Skill</p>
                                     <span>HTML</span> <span class="float-right">75%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 75%;"
-                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>CSS3</span> <span class="float-right">75%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 75%"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>PHP</span> <span class="float-right">50%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>JAVASCRIPT</span> <span class="float-right">80%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%"
-                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -151,8 +154,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-5">
                                         <div class="about-img">
-                                            <img src="assets/img/testimonial-2.jpg" class="img-fluid rounded b-shadow-a"
-                                                alt="">
+                                            <img src="assets/img/testimonial-2.jpg" class="img-fluid rounded b-shadow-a" alt="">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-7">
@@ -170,23 +172,19 @@
                                     <p class="title-s">Skill</p>
                                     <span>HTML</span> <span class="float-right">85%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 85%;"
-                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>CSS3</span> <span class="float-right">65%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 65%"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>PHP</span> <span class="float-right">55%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>JAVASCRIPT</span> <span class="float-right">70%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%"
-                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -235,8 +233,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-5">
                                         <div class="about-img">
-                                            <img src="assets/img/testimonial-3.jpg" class="img-fluid rounded b-shadow-a"
-                                                alt="">
+                                            <img src="assets/img/testimonial-3.jpg" class="img-fluid rounded b-shadow-a" alt="">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-7">
@@ -254,23 +251,19 @@
                                     <p class="title-s">Skill</p>
                                     <span>HTML</span> <span class="float-right">55%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%;"
-                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>CSS3</span> <span class="float-right">55%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>PHP</span> <span class="float-right">85%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 85%"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>JAVASCRIPT</span> <span class="float-right">70%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%"
-                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -319,8 +312,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-5">
                                         <div class="about-img">
-                                            <img src="assets/img/testimonial-4.jpg" class="img-fluid rounded b-shadow-a"
-                                                alt="">
+                                            <img src="assets/img/testimonial-4.jpg" class="img-fluid rounded b-shadow-a" alt="">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-7">
@@ -338,23 +330,19 @@
                                     <p class="title-s">Skill</p>
                                     <span>HTML</span> <span class="float-right">60%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%;"
-                                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>CSS3</span> <span class="float-right">55%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>PHP</span> <span class="float-right">80%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <span>JAVASCRIPT</span> <span class="float-right">70%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%"
-                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>

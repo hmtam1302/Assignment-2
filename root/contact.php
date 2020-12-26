@@ -17,6 +17,7 @@
     <!--Style file-->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -28,10 +29,18 @@
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
+            <div>
+                <?php
+                session_start();
+                if (session_status() === PHP_SESSION_NONE) {
+                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
+                } else {
+                    echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
+                }
+                ?>
+            </div>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
-                    class="material-icons" id="nav-icon">menu</i></button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
@@ -75,34 +84,25 @@
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <input type="text" name="name" class="form-control"
-                                                                id="name" placeholder="Your Name" data-rule="minlen:4"
-                                                                data-msg="Please enter at least 4 chars">
+                                                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
                                                             <div class="validate" id="validateName"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control animate__animated" name="email"
-                                                                id="email" placeholder="Your Email" data-rule="email"
-                                                                data-msg="Please enter a valid email">
+                                                            <input type="email" class="form-control animate__animated" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
                                                             <div class="validate" id="validateEmail"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control animate__animated" name="subject"
-                                                                id="subject" placeholder="Subject" data-rule="minlen:4"
-                                                                data-msg="Please enter at least 8 chars of subject">
+                                                            <input type="text" class="form-control animate__animated" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
                                                             <div class="validate" id="validateSubject"></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <textarea class="form-control animate__animated" name="message" id="message"
-                                                                rows="5" data-rule="required"
-                                                                data-msg="Please write something for us"
-                                                                placeholder="Message"></textarea>
+                                                            <textarea class="form-control animate__animated" name="message" id="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                                                             <div class="validate" id="validateMessage"></div>
                                                         </div>
                                                     </div>
@@ -112,8 +112,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 text-center">
-                                                        <button class="btn btn-outline-primary btn-lg btn-rounded"
-                                                            onclick="return validateData()">Send
+                                                        <button class="btn btn-outline-primary btn-lg btn-rounded" onclick="return validateData()">Send
                                                             Message
                                                         </button>
                                                     </div>
@@ -144,14 +143,10 @@
                                         </div>
                                         <div class="socials">
                                             <ul>
-                                                <li><a href="https://www.facebook.com/"><span class="ico-circle"><i
-                                                                class="fa fa-facebook-f"></i></span></a></li>
-                                                <li><a href="https://www.instagram.com/"><span class="ico-circle"><i
-                                                                class="fa fa-instagram"></i></span></a></li>
-                                                <li><a href="https://twitter.com/"><span class="ico-circle"><i
-                                                                class="fa fa-twitter"></i></span></a></li>
-                                                <li><a href="https://pinterest.com/"><span class="ico-circle"><i
-                                                                class="fa fa-pinterest-p"></i></span></a></li>
+                                                <li><a href="https://www.facebook.com/"><span class="ico-circle"><i class="fa fa-facebook-f"></i></span></a></li>
+                                                <li><a href="https://www.instagram.com/"><span class="ico-circle"><i class="fa fa-instagram"></i></span></a></li>
+                                                <li><a href="https://twitter.com/"><span class="ico-circle"><i class="fa fa-twitter"></i></span></a></li>
+                                                <li><a href="https://pinterest.com/"><span class="ico-circle"><i class="fa fa-pinterest-p"></i></span></a></li>
                                             </ul>
                                         </div>
                                     </div>

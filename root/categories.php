@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!--Boostrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -21,6 +21,7 @@
     <!--Style file-->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -32,10 +33,18 @@
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
+            <div>
+                <?php
+                session_start();
+                if (session_status() === PHP_SESSION_NONE) {
+                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
+                } else {
+                    echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
+                }
+                ?>
+            </div>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
-                    class="material-icons" id="nav-icon">menu</i></button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">

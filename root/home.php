@@ -13,10 +13,12 @@
     <!--Font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 
     <!--Style file-->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -28,10 +30,20 @@
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
+            <div>
+            <?php
+                session_start();
+                if (session_status() === PHP_SESSION_NONE){
+                    echo '<button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>';
+                }
+                else{
+                    echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
+                }
+            ?>
+            </div>
+            
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
-                    class="material-icons" id="nav-icon">menu</i></button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
@@ -60,15 +72,15 @@
         <div class="container intro-content">
             <h1 class="font-weight-bold text-white intro-title mb-4 animate__animated animate__backInDown">Bookstore
                 HCMUT</h1>
-            <p class="typewrite intro-subtitle" data-period="2000"
-                data-type="[ &quot;Huỳnh Công Hải&quot;, &quot;Trương Minh Hiệp&quot;, &quot;Hoàng Vũ Tĩnh&quot;, &quot;Hồ Ngọc Trí&quot; ]">
+            <p class="typewrite intro-subtitle" data-period="2000" data-type="[ &quot;Huỳnh Công Hải&quot;, &quot;Trương Minh Hiệp&quot;, &quot;Hoàng Vũ Tĩnh&quot;, &quot;Hồ Ngọc Trí&quot; ]">
                 <span class="wrap">Huỳnh Công Hải</span>
             </p>
-            <span class="wrap"></span>
         </div>
     </div>
     <!--Preloader-->
     <div id="preloader"></div>
+
+
 </body>
 
 </html>
