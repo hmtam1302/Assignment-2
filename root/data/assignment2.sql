@@ -21,9 +21,9 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (id, username, password) VALUES
-(1,'tri.hobknetid','123456'),
-(2,'tinh.hoangbknetid','123456');
+INSERT INTO users (id, username, password, email) VALUES
+(1,'tri.hobknetid','123456', 'tri.hobknetid@hcmut.edu.vn'),
+(2,'tinh.hoangbknetid','123456', 'tinh.hoangbknetid@hcmut.edu.vn');
 -- International book
 insert INTO product(name,author,type,url,price) values("A Madness of Sunshine","Nalini singh","International","assets/img/internationalbook/work-1.jpg","15");
 insert INTO product(name,author,type,url,price) values("Novice Dragoneer","Django Weller","International","assets/img/internationalbook/work-2.jpg","15");
