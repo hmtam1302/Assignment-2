@@ -20,5 +20,6 @@ if ($action == 'logout') {
     unset($_SESSION["username"]);
     //header("Location: home.php");
     echo "home.php";
+    session_destroy();
 }
 ?>
