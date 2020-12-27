@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,19 +41,11 @@
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <div>
-                <?php
-                session_start();
-                if (!isset($_SESSION['username'])) {
-                    echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
-                } else {
-                    echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
-                }
-                ?>
-            </div>
-
+            <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
+                    class="material-icons" id="nav-icon">menu</i></button>
+            <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
                     <li class="nav-item">
@@ -73,6 +76,13 @@
             <p class="typewrite intro-subtitle" data-period="2000" data-type="[ &quot;Huỳnh Công Hải&quot;, &quot;Trương Minh Hiệp&quot;, &quot;Hoàng Vũ Tĩnh&quot;, &quot;Hồ Ngọc Trí&quot; ]">
                 <span class="wrap">Huỳnh Công Hải</span>
             </p>
+
+            <span class="wrap"></span>
+            
+            <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+            <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+
+
         </div>
         <?php
         if (isset($_SESSION['username'])) {
