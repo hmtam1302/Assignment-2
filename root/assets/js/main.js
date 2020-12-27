@@ -263,32 +263,51 @@ function save_information() {
     document.getElementById("button-group").innerHTML = button;
 }
 
-function changepassword(){
+function changepassword() {
     var password = document.getElementById("password-change").value;
     var newpassword = document.getElementById('new-password-change').value;
-    
+
     $.post(
         "action.php",
-        {action:"changepassword", oldPassword: password, newPassword: newpassword},
-        function(data, status){
-            if (data == "Change password successfully!!!"){
+        { action: "changepassword", oldPassword: password, newPassword: newpassword },
+        function (data, status) {
+            if (data == "Change password successfully!!!") {
                 alert(data + "\nPlease log in again");
-                logout()
+                logout();
             }
-            else{
+            else {
                 alert(data);
             }
         }
     )
 }
 
-function validateConfirm(){
+function validateConfirm() {
     var newpassword = document.getElementById('new-password-change').value;
     var confirmpassword = document.getElementById('confirm-password-change').value;
-    if (newpassword != confirmpassword){
+    if (newpassword != confirmpassword) {
         document.getElementById('confirmErr').innerHTML = "Confirm password does not match!!!";
     }
-    else{
-        document.getElementById('confirmErr').innerHTML ="";
+    else {
+        document.getElementById('confirmErr').innerHTML = "";
     }
+}
+
+function sendComment(id) {
+    var data = document.getElementById("comment").value;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + "-" + mm + "-" + dd;
+
+    $.post(
+        "action.php",
+        { action: "comment", product_id: id, comment: data, date: today },
+        function (data, status) {
+            alert(data);
+            window.location.href = "detail.php?id=" + id;
+        }
+    )
 }

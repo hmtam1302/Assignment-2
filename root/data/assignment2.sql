@@ -47,7 +47,7 @@ insert INTO product(name,author,type,url,price) values("A Daydreamer's Utopia","
 insert INTO product(name,author,type,url,price) values("The priory of the Orange tree","Samantha Shannon","International","assets/img/internationalbook/work-16.jpg","15");
 insert INTO product(name,author,type,url,price) values("A game of Thrones","George R.R Martin","International","assets/img/internationalbook/work-17.jpg","15");
 insert INTO product(name,author,type,url,price) values("The edge of The Unknown","Andrew Hamburg","International","assets/img/internationalbook/work-18.jpg","15");
-insert INTO product(name,author,type,url,price) values("Dark Space","Author name","International","assets/img/internationalbook/work-19.jpg","15");
+insert INTO product(name,author,type,url,price) values("Dark Space","author name","International","assets/img/internationalbook/work-19.jpg","15");
 insert INTO product(name,author,type,url,price) values("Harry Potter and the Philosopher's Stone","J.L.Rowling","International","assets/img/internationalbook/work-20.jpg","15");
 insert INTO product(name,author,type,url,price) values("Tess of the Road","Rachel Hartman","International","assets/img/internationalbook/work-21.jpg","15");
 
@@ -98,3 +98,19 @@ insert INTO product(name,author,type,url,price) values
 ("Tri","Channel","Toys","assets/img/toys/toy-5.jpg","15"),
 ("Car model","Channel","Toys","assets/img/toys/toy-6.jpg","15");
 
+DROP TABLE IF EXISTS comment;
+CREATE TABLE comment (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    time DATE NOT NULL,
+    detail TEXT(100) NOT NULL
+);
+
+INSERT INTO comment(product_id, username, time, detail) VALUES
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum");

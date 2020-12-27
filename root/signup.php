@@ -170,23 +170,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h1 class="font-weight-bold">Create Account</h1>
                     <img src="assets/img/hcmut.png">
 
-                    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?> " style="margin-bottom: 0;">
                         <!-- fix -->
                         <input type="text" name="username" class="form-control animate__animated" id="username" placeholder="Username" required data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="<?php echo $username; ?>"> <!-- fix -->
-                        <span class="text-danger"><?php echo $username_err; ?></span> <!-- fix -->
-                    </div>
 
-                    <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                        <!-- fix -->
-                        <input type="password" name="password" class="form-control animate__animated" id="password" placeholder="Password" required data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="<?php echo $password; ?>"> <!-- fix -->
-                        <span class="text-danger"><?php echo $password_err; ?></span> <!-- fix -->
                     </div>
+                    <span class="text-danger"><?php echo $username_err; ?></span> <!-- fix -->
+                    <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>" style="margin-bottom: 0;">
+                        <!-- fix -->
+                        <input type="password" name="password" class="form-control animate__animated" id="new-password-change" placeholder="Password" required data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="<?php echo $password; ?>"> <!-- fix -->
+                    </div>
+                    <span class="text-danger"><?php echo $password_err; ?></span> <!-- fix -->
 
-                    <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                    <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>" style="margin-bottom: 0;">
                         <!-- fix -->
-                        <input type="password" name="confirm_password" class="form-control animate__animated" id="confirm_password" required placeholder="Confirm Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="<?php echo $confirm_password; ?>"> <!-- fix -->
-                        <span class="text-danger"><?php echo $confirm_password_err; ?></span> <!-- fix -->
+                        <input type="password" name="confirm_password" class="form-control animate__animated" id="confirm-password-change" required placeholder="Confirm Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars"  onkeyup="validateConfirm()" value="<?php echo $confirm_password; ?>"> <!-- fix -->
                     </div>
+                    <span class="text-danger mb-3" id="confirmErr"><?php echo $confirm_password_err; ?></span> <!-- fix -->
 
                     <button class="btn btn-outline-primary btn-rounded px-5">Sign Up</button>
                 </form>

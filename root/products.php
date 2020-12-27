@@ -101,7 +101,9 @@
 
                 $database = "select * from product";
                 $record = mysqli_query($con, $database);
+                $id = 0;
                 while ($row = mysqli_fetch_assoc($record)) {
+                    $id++;
                     $path = $row['url'];
                     $name = $row['name'];
                     $author = $row['author'];
@@ -109,25 +111,23 @@
                 ?>
                     <div class="col-md-4 ">
                         <div class="work-box animate__animated animate__fadeInLeftBig">
-                            <a href="" data-gall="portfolioGallery" class="venobox">
-                                <div class="work-img">
+                            <a href="detail.php?id=<?php echo $id?>" data-gall="portfolioGallery" class="venobox">
+                                <div class="work-img text-center">
                                     <?php echo '<img src="' . $path . '" alt="" class="img-fluid">' ?>
-
                                 </div>
                             </a>
                             <div class="work-content">
                                 <div class="row">
                                     <div class="col-sm-8">
-                                        <h2 class="w-title"><?php echo $name ?></h2>
-                                        <p>Author: <?php echo $author ?></p>
+                                        <h2 class="w-title font-weight-bold"><?php echo $name ?></h2>
                                         <p>Description: <?php echo $type ?></p>
                                         <div class="w-more">
-                                            <span class="w-ctegory">Price</span> - <span class="w-date">15$</span>
+                                            <span class="w-category">Price</span> - <span>15$</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="w-like">
-                                            <a href="portfolio-details.html"> <span class="ion-ios-plus-outline"></span></a>
+                                            <button class="btn btn-rounded btn-outline-primary" onclick="directDetail(<?php echo $id?>)"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
                                         </div>
                                     </div>
                                 </div>

@@ -64,7 +64,7 @@ if ($action == 'logout') {
                         echo changePassword($mysqli, $newPassword, $username);
                     } else {
                         // Display an error message if password is not valid
-                       echo "The password you entered was wrong";
+                        echo "The password you entered was wrong";
                     }
                 }
             }
@@ -75,17 +75,39 @@ if ($action == 'logout') {
         // Close statement
         $stmt->close();
     }
+} else if ($action == "comment") {
+    session_start();
+    $username = $_SESSION['username'];
+    $product_id = $_POST['product_id'];
+    $comment = $_POST['comment'];
+    $date = $_POST['date'];
+
+    $sql = "INSERT INTO comment(product_id, username, time,detail) VALUES (?, ?, ?, ?)";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("isss", $param_product_id, $param_username, $param_time, $param_detail);
+
+        $param_product_id = $product_id;
+        $param_username = $username;
+        $param_time = $date;
+        $param_detail = $comment;
+        if ($stmt->execute()) {
+            echo "Send comment successfully!!!";
+        } else {
+            echo "Something went wrong!!!";
+        }
+    }
 }
 
 function changePassword($mysqli, $password, $username)
 {
     $param_password = $param_username = NULL;
-    
+
     $sql = "UPDATE users SET password=? WHERE username=?";
-    
-    if ($stmt=$mysqli->prepare($sql)){
-        $stmt->bind_param("ss",$param_password, $param_username);
-        
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("ss", $param_password, $param_username);
+
         //Set param
         $param_password = $param_password = password_hash($password, PASSWORD_DEFAULT);
         $param_username = $username;
@@ -95,7 +117,7 @@ function changePassword($mysqli, $password, $username)
         } else {
             return "Some things went wrong!";
         }
-    } else{
+    } else {
         return "Some things went wrong";
     }
 }
