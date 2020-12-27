@@ -13,13 +13,4 @@ $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if ($mysqli === false) {
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
-
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
-if ($action == 'logout') {
-    session_start();
-    unset($_SESSION["username"]);
-    //header("Location: home.php");
-    echo "home.php";
-    session_destroy();
-}
 ?>

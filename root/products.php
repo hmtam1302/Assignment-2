@@ -24,7 +24,7 @@
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-    <title>Price Page</title>
+    <title>Products</title>
 </head>
 
 <body data-new-gr-c-s-check-loaded="8.867.0" id="page-body">
@@ -107,9 +107,6 @@
                     $author = $row['author'];
                     $type = $row['type'];
                 ?>
-
-
-
                     <div class="col-md-4 ">
                         <div class="work-box animate__animated animate__fadeInLeftBig">
                             <a href="" data-gall="portfolioGallery" class="venobox">

@@ -1,5 +1,6 @@
 <?php
 // Check if the user is already logged in, if yes then redirect him to welcome page
+session_start();
 if (isset($_SESSION["username"])) {
     header("location: home.php");
     exit;
@@ -62,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             header("location: home.php");
                         } else {
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid." . $hashed_password . $password;
+                            $password_err = "The password you entered was wrong";
                         }
                     }
                 } else {
@@ -116,7 +117,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
             <div>
                 <?php
-                session_start();
                 if (!isset($_SESSION['username'])) {
                     echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
                 } else {

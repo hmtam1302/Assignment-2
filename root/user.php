@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +37,6 @@
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
             <div>
                 <?php
-                session_start();
                 if (!isset($_SESSION['username'])) {
                     echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
                 } else {
@@ -78,66 +83,83 @@
                                                 User information
                                             </h5>
                                         </div>
+                                        <?php
+                                        //Get data from database
+                                        require_once "config.php";
+                                        $username = $_SESSION['username'];
+
+                                        $sql = 'SELECT username, password, email, full_name, url, telephone, date_of_birth FROM users WHERE username = ?';
+                                        if ($stmt = $mysqli->prepare($sql)) {
+                                            $stmt->bind_param("s", $param_username);
+                                            $param_username = $username;
+
+                                            if ($stmt->execute()) {
+                                                $stmt->store_result();
+                                                $stmt->bind_result($username, $hashed_password, $email, $full_name, $url, $telephone, $date_of_birth);
+                                                $stmt->fetch();
+                                            }
+                                        }
+                                        ?>
                                         <div>
                                             <form>
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-text-input" class="col-2 col-form-label"><strong>Username</strong></label>
+                                                            <label for="username" class="col-2 col-form-label"><strong>Username</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="text" value="conghai" id="example-text-input" disabled>
+                                                                <input class="form-control" type="text" value="<?php echo $username ?>" id="username" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-password-input" class="col-2 col-form-label"><Strong>Password</strong></label>
+                                                            <label for="password" class="col-2 col-form-label"><Strong>Password</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="password" value="delbiet" id="example-date-input" disabled>
+                                                                <input class="form-control" type="password" value="password" id="password" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-2"></div>
-                                                            <div class="col-10"><a href="#" data-toggle="modal" data-target="#exampleModal" class="text-primary" style="font-style:italic;">Change password?</a></div>
+                                                            <div class="col-10"><a href="#" data-toggle="modal" data-target="#passwordModal" class="text-primary" style="font-style:italic;">Change password?</a></div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-text-input" class="col-2 col-form-label"><strong>Full name</strong></label>
+                                                            <label for="full-name" class="col-2 col-form-label"><strong>Full name</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                                                <input class="form-control" type="text" value="<?php echo $full_name ?>" id="full-name" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-email-input" class="col-2 col-form-label"><strong>Email</strong></label>
+                                                            <label for="email" class="col-2 col-form-label"><strong>Email</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
+                                                                <input class="form-control" type="email" value="<?php echo $email ?>" id="email" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-url-input" class="col-2 col-form-label"><strong>URL</strong></label>
+                                                            <label for="url" class="col-2 col-form-label"><strong>URL</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input">
+                                                                <input class="form-control" type="url" value="<?php echo $url ?>" id="url" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-tel-input" class="col-2 col-form-label"><strong>Telephone</strong></label>
+                                                            <label for="telephone" class="col-2 col-form-label"><strong>Telephone</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
+                                                                <input class="form-control" type="tel" value="<?php echo $telephone; ?>" id="telephone" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mb-3">
                                                         <div class="form-group row align-items-center">
-                                                            <label for="example-date-input" class="col-2 col-form-label"><Strong>Date of birth</strong></label>
+                                                            <label for="birthday" class="col-2 col-form-label"><Strong>Date of birth</strong></label>
                                                             <div class="col-10">
-                                                                <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                                                                <input class="form-control" type="date" value="<?php echo $date_of_birth; ?>" id="birthday" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -145,12 +167,11 @@
                                                         <div class="sent-message" id="message-box">Your information has been changed!!!
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 text-center">
-                                                        <button class="btn btn-outline-primary btn-lg btn-rounded" onclick="return validateData()">Edit information</button>
-                                                    </div>
-
                                                 </div>
                                             </form>
+                                            <div class="col-md-12 text-center" id="button-group">
+                                                <button class="btn btn-outline-primary btn-lg btn-rounded" onclick="edit_information()">Edit information</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -162,11 +183,11 @@
         </section>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="modalLabel">Change password</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -174,28 +195,29 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-2 col-form-label"><strong>Current password</strong></label>
+                                <label for="password-change" class="col-2 col-form-label"><strong>Current password</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="password" value="conghai" id="example-text-input">
+                                    <input class="form-control" type="password" value="" id="password-change">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-2 col-form-label"><strong>New password</strong></label>
+                                <label for="new-password-change" class="col-2 col-form-label"><strong>New password</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="password" value="conghai" id="example-text-input">
+                                    <input class="form-control" type="password" value="" id="new-password-change">
                                 </div>
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-2 col-form-label"><strong>Confirm password</strong></label>
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="confirm-password-change" class="col-2 col-form-label"><strong>Confirm password</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="password" value="conghai" id="example-text-input">
+                                    <input class="form-control" type="password" value="" id="confirm-password-change" onkeyup="validateConfirm()">
                                 </div>
+                                <span class="text-danger" id="confirmErr"></span>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" onclick="changepassword()">Save changes</button>
                     </div>
                 </div>
             </div>

@@ -194,7 +194,7 @@ function directLogin() {
 
 function logout() {
     xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "config.php?action=logout", true);
+    xmlhttp.open("GET", "action.php?action=logout", true);
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             window.location.href = this.responseText;
@@ -203,6 +203,92 @@ function logout() {
     xmlhttp.send();
 }
 
-function directSignup(){
+function directSignup() {
     window.location.href = "signup.php";
+}
+
+function edit_information() {
+    //Enable form
+    document.getElementById("full-name").disabled = false;
+    document.getElementById("email").disabled = false;
+    document.getElementById("url").disabled = false;
+    document.getElementById("telephone").disabled = false;
+    document.getElementById("birthday").disabled = false;
+
+    //Create button cancel and button save information
+    var cancel = document.createElement("button");
+    var button = '<button class="btn btn-outline-primary btn-lg btn-rounded px-5 mx-5" onclick="cancel_edit()">Cancel</button>';
+    button += '<button class="btn btn-primary btn-lg btn-rounded mx-5 px-5" onclick="save_information()">Save</button>'
+
+    document.getElementById("button-group").innerHTML = button;
+}
+
+function cancel_edit() {
+    //Disable form
+    document.getElementById("full-name").disabled = true;
+    document.getElementById("email").disabled = true;
+    document.getElementById("url").disabled = true;
+    document.getElementById("telephone").disabled = true;
+    document.getElementById("birthday").disabled = true;
+
+    //Create button edit
+    var button = '<button class="btn btn-outline-primary btn-lg btn-rounded" onclick="edit_information()">Edit information</button>';
+    document.getElementById("button-group").innerHTML = button;
+}
+
+function save_information() {
+    //Get value
+    var fullname = "&fullname=" + document.getElementById("full-name").value;
+    var email = "&email=" + document.getElementById("email").value;
+    var url = "&url=" + document.getElementById("url").value;
+    var telephone = "&telephone=" + document.getElementById("telephone").value;
+    var birthday = "&birthday=" + document.getElementById("birthday").value;
+    var action = "action.php?action=changeinfo" + fullname + email + url + telephone + birthday;
+    $.get(
+        action,
+        function (data, status) {
+            alert(data);
+        }
+    );
+
+    //Disable form
+    document.getElementById("full-name").disabled = true;
+    document.getElementById("email").disabled = true;
+    document.getElementById("url").disabled = true;
+    document.getElementById("telephone").disabled = true;
+    document.getElementById("birthday").disabled = true;
+
+    //Change button to edit
+    var button = '<button class="btn btn-outline-primary btn-lg btn-rounded" onclick="edit_information()">Edit information</button>';
+    document.getElementById("button-group").innerHTML = button;
+}
+
+function changepassword(){
+    var password = document.getElementById("password-change").value;
+    var newpassword = document.getElementById('new-password-change').value;
+    
+    $.post(
+        "action.php",
+        {action:"changepassword", oldPassword: password, newPassword: newpassword},
+        function(data, status){
+            if (data == "Change password successfully!!!"){
+                alert(data + "\nPlease log in again");
+                logout()
+            }
+            else{
+                alert(data);
+            }
+        }
+    )
+}
+
+function validateConfirm(){
+    var newpassword = document.getElementById('new-password-change').value;
+    var confirmpassword = document.getElementById('confirm-password-change').value;
+    if (newpassword != confirmpassword){
+        document.getElementById('confirmErr').innerHTML = "Confirm password does not match!!!";
+    }
+    else{
+        document.getElementById('confirmErr').innerHTML ="";
+    }
 }
