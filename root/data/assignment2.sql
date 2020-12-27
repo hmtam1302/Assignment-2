@@ -18,6 +18,11 @@ CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255),
+    url VARCHAR(255), 
+    telephone VARCHAR(255),
+    date_of_birth DATE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

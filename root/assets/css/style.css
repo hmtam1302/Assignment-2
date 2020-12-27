@@ -831,6 +831,7 @@ input {
 }
 
 .sign-up-container {
+    transform: translateX(100%);
 	left: 0;
 	width: 50%;
 	opacity: 0;

@@ -202,3 +202,7 @@ function logout() {
     };
     xmlhttp.send();
 }
+
+function directSignup(){
+    window.location.href = "signup.php";
+}

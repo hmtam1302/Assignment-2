@@ -1,80 +1,77 @@
 <?php
-// Initialize the session
-session_start();
- 
 // Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+if (isset($_SESSION["username"])) {
     header("location: home.php");
     exit;
 }
- 
+
 // Include config file
 require_once "config.php";
- 
+
 // Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
- 
+
 // Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
+    if (empty(trim($_POST["username"]))) {
         $username_err = "Please enter username.";
-    } else{
+    } else {
         $username = trim($_POST["username"]);
     }
-    
+
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
+    if (empty(trim($_POST["password"]))) {
         $password_err = "Please enter your password.";
-    } else{
+    } else {
         $password = trim($_POST["password"]);
     }
-    
+
     // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+    if (empty($username_err) && empty($password_err)) {
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
-        
-        if($stmt = $mysqli->prepare($sql)){
+
+        if ($stmt = $mysqli->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_username);
-            
+
             // Set parameters
             $param_username = $username;
-            
+
             // Attempt to execute the prepared statement
-            if($stmt->execute()){
+            if ($stmt->execute()) {
                 // Store result
                 $stmt->store_result();
-                
+
                 // Check if username exists, if yes then verify password
-                if($stmt->num_rows == 1){                    
+                if ($stmt->num_rows == 1) {
                     // Bind result variables
                     $stmt->bind_result($id, $username, $hashed_password);
-                    if($stmt->fetch()){
-                        if(password_verify($password, $hashed_password)){
+                    if ($stmt->fetch()) {
+                        if (password_verify($password, $hashed_password)) {
                             // Password is correct, so start a new session
                             session_start();
-                            
+
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            
+                            $_SESSION["username"] = $username;
+
                             // Redirect user to welcome page
                             header("location: home.php");
-                        } else{
+                        } else {
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "The password you entered was not valid." . $hashed_password . $password;
                         }
                     }
-                } else{
+                } else {
                     // Display an error message if username doesn't exist
                     $username_err = "No account found with that username.";
                 }
-            } else{
+            } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
 
@@ -82,19 +79,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->close();
         }
     }
-    
+
     // Close connection
     $mysqli->close();
 }
 ?>
-
-
-<!-- sign up php -->
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,10 +116,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
-            <button class="login-btn btn btn-outline-primary" #id="login" href="login.html">Login</button>
+            <div>
+                <?php
+                session_start();
+                if (!isset($_SESSION['username'])) {
+                    echo '<button class="login-btn btn btn-outline-primary" onclick="directLogin()">Login</button>';
+                } else {
+                    echo "<button style='font-size:24px' class='btn btn-outline-primary btn-rounded' onclick='directInformation()'><i class='fas fa-user-circle'></i></button>";
+                }
+                ?>
+            </div>
             <a href="index.php" class="navbar-brand font-weight-bold" id="projectName">Bookstore</a>
-            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i
-                    class="material-icons" id="nav-icon">menu</i></button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#navbarDefault"><i class="material-icons" id="nav-icon">menu</i></button>
             <div class="line-break"></div>
             <div id="navbarDefault" class="navbar-collapse collapse justify-content-center align-items-center">
                 <ul class="nav navbar-nav text-uppercase font-weight-bold">
@@ -153,44 +150,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
         </div>
     </nav>
-    
-        <!---------Login form-->
-        <div class="intro-overlay"></div>
-        <div class="main d-flex justify-content-center align-items-center flex-column flex-wrap">
-            <div class="login-container" id="container">
-                
-                <div class="form-container sign-in-container">
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> <!-- fix -->
-                        <h1 class="font-weight-bold">Login</h1>
-                        <img src="assets/img/hcmut.png">
-                        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>"> <!-- fix -->
-                            <input type="text" name="username" class="form-control animate__animated" id="username"
-                                placeholder="Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars"
-                                value="<?php echo $username; ?>"> <!-- fix -->
-                            <span class="help-block"><?php echo $username_err; ?></span> <!-- fix -->
-                            <div class="validate" id="validateName"></div>
-                        </div>
-                        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>"> <!-- fix -->
-                            <input type="password" name="password" class="form-control animate__animated" id="password"
-                                placeholder="Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <span class="help-block"><?php echo $password_err; ?></span> <!-- fix -->
-                            <div class="validate" id="validateName"></div>  
-                        </div>
-                        <a href="#" class="my-2">Forgot your password?</a>
-                        <button class="btn btn-outline-primary btn-rounded px-5">Sign In</button>
-                    </form>
+
+    <!---------Login form-->
+    <div class="intro-overlay"></div>
+    <div class="main d-flex justify-content-center align-items-center flex-column flex-wrap">
+        <div class="login-container" id="container">
+            <div class="form-container sign-in-container">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <!-- fix -->
+                    <h1 class="font-weight-bold">Log In</h1>
+                    <img src="assets/img/hcmut.png">
+                    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                        <!-- fix -->
+                        <input type="text" name="username" class="form-control animate__animated" id="username" placeholder="Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required value="<?php echo $username; ?>"> <!-- fix -->
+                    </div>
+                    <span class="text-danger"><?php echo $username_err; ?></span> <!-- fix -->
+                    <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                        <!-- fix -->
+                        <input type="password" name="password" class="form-control animate__animated" id="password" placeholder="Password" data-rule="minlen:4" required data-msg="Please enter at least 4 chars">
+                    </div>
+                    <span class="text-danger"><?php echo $password_err; ?></span> <!-- fix -->
+                    <a href="#" class="my-2">Forgot your password?</a>
+                    <button class="btn btn-outline-primary btn-rounded px-5">Log In</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-right">
+                        <h1 class="text-white">Welcome back!</h1>
+                        <p>To keep connected with us please login with your personal info!</p>
+                        <br>
+                        <p style="font-style: italic;">Don't have any account? Sign up here</p>
+                        <button class="btn btn-primary btn-rounded px-5 ghost" onclick="directSignup()">Sign Up</button>
+                    </div>
                 </div>
-                
             </div>
         </div>
     </div>
+
     <!--Preloader-->
     <div id="preloader"></div>
-
-
-
-    
-
 
 </body>
 
