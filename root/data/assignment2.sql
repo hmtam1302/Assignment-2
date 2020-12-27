@@ -4,6 +4,7 @@ use assignment2;
 drop table if exists product;
 
 create table product(
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 name varchar(59),
 author varchar(50),
 -- author name for book and producer for another products
@@ -95,5 +96,5 @@ insert INTO product(name,author,type,url,price) values
 ("Hiep","Channel","Toys","assets/img/toys/toy-3.jpg","15"),
 ("Hai","Channel","Toys","assets/img/toys/toy-4.jpg","15"),
 ("Tri","Channel","Toys","assets/img/toys/toy-5.jpg","15"),
-("Car model","Chanenl","Toys","assets/img/toys/toy-6.jpg","15");
+("Car model","Channel","Toys","assets/img/toys/toy-6.jpg","15");
 
