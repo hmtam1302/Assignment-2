@@ -76,7 +76,7 @@
             <span class="wrap"></span>
             <?php
             if (isset($_SESSION['username'])) {
-                echo '<div class="text-white"><h2>Hi, <b>' . htmlspecialchars($_SESSION["username"]) . '</b>. Welcome to our site.</h2></div>';
+                echo '<h2 class="text-white">Hi, <b>' . htmlspecialchars($_SESSION["username"]) . '!</b>. Welcome to our site.</h2></div>';
             }
             ?>
         </div>

@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->store_result();
 
                 if ($stmt->num_rows == 1) {
-                    $username_err = "This username is already taken.";
+                    $username_err = "This username is already used.";
                 } else {
                     $username = trim($_POST["username"]);
                 }
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($_POST["password"]))) {
         $password_err = "Please enter a password.";
     } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have atleast 6 characters.";
+        $password_err = "Password must have at least 6 characters.";
     } else {
         $password = trim($_POST["password"]);
     }
