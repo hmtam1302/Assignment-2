@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/admin.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Import lib -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/index.css">
+
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
-<body>
-    <div class="login">
-        <h1>Login</h1>
-        <form method="post">
-            <input type="text" name="u" placeholder="Username" required="required" id="u"/>
-            <input type="password" name="p" placeholder="Password" required="required" id="p"/>
-            <button type="submit" class="btn btn-primary btn-block btn-large" onclick="login();">Let me in.</button>
-        </form>
+
+<body style="background-color: #909090;">
+    <div class="overlay d-flex justify-content-center align-items-center flex-column">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="font-weight-bold">Admin login</h1>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="username" class="form-control" id="username" aria-describedby="username" placeholder="Enter username">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
-<script>
-    function login(){
-        var u = $('u').val();
-        var p = $('u').val();
-        $.ajax({
-            url: "backend/login.php",
-            type: 'post',
-            data: {
-                checkLogin: 'check',
-                username: u,
-                password: p
-            },
-            success: function(data, status) {
-                if (data == 'fail') {
-                    alert('login fail');
-                } else {
-                    window.location.replace("home.html");
-                }
-            }
-        });
-    }
-</script>
-</html>
