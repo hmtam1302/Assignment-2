@@ -65,6 +65,24 @@
     <!--Abput section-->
     <section id="about" class="section sect-pt4 d-flex flex-column align-items-center mt-4">
         <!--Item 1-->
+        <?php
+        require_once "config.php";
+
+        //Display staff information
+        $sql = "SELECT * FROM staff";
+
+        if ($stmt = $mysqli->prepare($sql)) 
+            {
+                if ($stmt->execute()) 
+                {
+                    $stmt->store_result();
+
+                    $stmt->bind_result($id,$name,$profile,$email,$phone,$html,
+                    $css,$php,$javascript,$detail,$url);
+                                        
+                    while ($stmt->fetch()) 
+                    {
+                        ?>
         <div class="container d-flex justify-content-center align-items-center section-mt-10 animate__animated animate__fadeInLeftBig">
             <div class="row">
                 <div class="col-sm-12">
@@ -74,37 +92,37 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-5">
                                         <div class="about-img">
-                                            <img src="/assets/img/testimonial-1.jpg" class="img-fluid rounded b-shadow-a" alt="">
+                                            <?php echo '<img src="' . $url .'" class="img-fluid rounded b-shadow-a" alt="">' ?>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-7">
                                         <div>
-                                            <p><span class="title-s">Name: </span> <span>Huỳnh Công Hải</span></p>
-                                            <p><span class="title-s">Profile: </span> <span>Full stack developer</span>
+                                            <p><span class="title-s">Name: </span> <span><?php echo $name ?></span></p>
+                                            <p><span class="title-s">Profile: </span> <span><?php echo $profile ?></span>
                                             </p>
                                             <p><span class="title-s">Email: </span>
-                                                <span style="word-break: break-word">hai.huynh.2101@hcmut.edu.vn</span></p>
-                                            <p><span class="title-s">Phone: </span> <span>(+84) 94 223 9400</span></p>
+                                                <span style="word-break: break-word"><?php echo $email ?></span></p>
+                                            <p><span class="title-s">Phone: </span> <span><?php echo $phone ?></span></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="skill-mf">
                                     <p class="title-s">Skill</p>
-                                    <span>HTML</span> <span class="float-right">75%</span>
+                                    <span>HTML</span> <span class="float-right"><?php echo $html ?>%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width:<?php echo $html ?>%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <span>CSS3</span> <span class="float-right">75%</span>
+                                    <span>CSS3</span> <span class="float-right"><?php echo $css ?>%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $css ?>%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <span>PHP</span> <span class="float-right">50%</span>
+                                    <span>PHP</span> <span class="float-right"><?php echo $php ?>%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $php ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <span>JAVASCRIPT</span> <span class="float-right">80%</span>
+                                    <span>JAVASCRIPT</span> <span class="float-right"><?php echo $javascript ?>%</span>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width:<?php echo $javascript ?>%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -142,243 +160,12 @@
                 </div>
             </div>
         </div>
-
-        <!--Item 2-->
-        <div class="container d-flex justify-content-center align-items-center section-mt-10">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box-shadow-full">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-5">
-                                        <div class="about-img">
-                                            <img src="/assets/img/testimonial-2.jpg" class="img-fluid rounded b-shadow-a" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-7">
-                                        <div>
-                                            <p><span class="title-s">Name: </span> <span>Trương Minh Hiệp</span></p>
-                                            <p><span class="title-s">Profile: </span> <span>Full stack developer</span>
-                                            </p>
-                                            <p><span class="title-s">Email: </span>
-                                                <span style="word-break: break-word">hiep.truongminh@hcmut.edu.vn</span></p>
-                                            <p><span class="title-s">Phone: </span> <span>(+84) 39 907 0916</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="skill-mf">
-                                    <p class="title-s">Skill</p>
-                                    <span>HTML</span> <span class="float-right">85%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>CSS3</span> <span class="float-right">65%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>PHP</span> <span class="float-right">55%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>JAVASCRIPT</span> <span class="float-right">70%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="pt-4 pt-md-0">
-                                    <div class="title-box-2">
-                                        <h5 class="title-left">
-                                            About me
-                                        </h5>
-                                    </div>
-                                    <p class="lead">
-                                        Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur
-                                        arcu erat, accumsan id
-                                        imperdiet et, porttitor
-                                        at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                                        Nulla
-                                        porttitor accumsan tincidunt.
-                                    </p>
-                                    <p class="lead">
-                                        Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit
-                                        tortor eget felis
-                                        porttitor volutpat. Vestibulum
-                                        ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
-                                    </p>
-                                    <p class="lead">
-                                        Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in,
-                                        elementum id enim.
-                                        Nulla porttitor accumsan
-                                        tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Item 3-->
-        <div class="container d-flex justify-content-center align-items-center section-mt-10">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box-shadow-full">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-5">
-                                        <div class="about-img">
-                                            <img src="/assets/img/testimonial-3.jpg" class="img-fluid rounded b-shadow-a" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-7">
-                                        <div>
-                                            <p><span class="title-s">Name: </span> <span>Hoàng Vũ Tĩnh</span></p>
-                                            <p><span class="title-s">Profile: </span> <span>Back-end developer</span>
-                                            </p>
-                                            <p><span class="title-s">Email: </span>
-                                                <span style="word-break: break-word">tinh.hoangbknetid@hcmut.edu.vn</span></p>
-                                            <p><span class="title-s">Phone: </span> <span>(+84) 81 647 7215</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="skill-mf">
-                                    <p class="title-s">Skill</p>
-                                    <span>HTML</span> <span class="float-right">55%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>CSS3</span> <span class="float-right">55%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>PHP</span> <span class="float-right">85%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>JAVASCRIPT</span> <span class="float-right">70%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="pt-4 pt-md-0">
-                                    <div class="title-box-2">
-                                        <h5 class="title-left">
-                                            About me
-                                        </h5>
-                                    </div>
-                                    <p class="lead">
-                                        Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur
-                                        arcu erat, accumsan id
-                                        imperdiet et, porttitor
-                                        at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                                        Nulla
-                                        porttitor accumsan tincidunt.
-                                    </p>
-                                    <p class="lead">
-                                        Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit
-                                        tortor eget felis
-                                        porttitor volutpat. Vestibulum
-                                        ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
-                                    </p>
-                                    <p class="lead">
-                                        Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in,
-                                        elementum id enim.
-                                        Nulla porttitor accumsan
-                                        tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Item 4-->
-        <div class="container d-flex justify-content-center align-items-center section-mt-10">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box-shadow-full">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-5">
-                                        <div class="about-img">
-                                            <img src="/assets/img/testimonial-4.jpg" class="img-fluid rounded b-shadow-a" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-7">
-                                        <div>
-                                            <p><span class="title-s">Name: </span> <span>Hồ Ngọc Trí</span></p>
-                                            <p><span class="title-s">Profile: </span> <span>Back-end developer</span>
-                                            </p>
-                                            <p><span class="title-s">Email: </span>
-                                                <span style="word-break: break-word">tri.hobknetid@hcmut.edu.vn</span></p>
-                                            <p><span class="title-s">Phone: </span> <span>(+84) 97 757 0593</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="skill-mf">
-                                    <p class="title-s">Skill</p>
-                                    <span>HTML</span> <span class="float-right">60%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>CSS3</span> <span class="float-right">55%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>PHP</span> <span class="float-right">80%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>JAVASCRIPT</span> <span class="float-right">70%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="pt-4 pt-md-0">
-                                    <div class="title-box-2">
-                                        <h5 class="title-left">
-                                            About me
-                                        </h5>
-                                    </div>
-                                    <p class="lead">
-                                        Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur
-                                        arcu erat, accumsan id
-                                        imperdiet et, porttitor
-                                        at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                                        Nulla
-                                        porttitor accumsan tincidunt.
-                                    </p>
-                                    <p class="lead">
-                                        Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit
-                                        tortor eget felis
-                                        porttitor volutpat. Vestibulum
-                                        ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
-                                    </p>
-                                    <p class="lead">
-                                        Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in,
-                                        elementum id enim.
-                                        Nulla porttitor accumsan
-                                        tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php
+                    }
+                }
+            }
+        ?>
+        
     </section>
     <?php
     if (isset($_SESSION['username'])) {
