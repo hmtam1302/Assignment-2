@@ -92,54 +92,103 @@
             <!-- ======= Get Url Image from Database ======= -->
             <div class="row">
                 <?php
-                define('DB_HOST', 'localhost');
-                define('DB_NAME', 'assignment2');
-                define('DB_USER', 'root');
-                define('DB_PASSWORD', '');
+                require_once "config.php";
 
-                $con = mysqli_connect(DB_HOST, DB_USER, '', DB_NAME);
+                if (!isset($_GET['action'])) {
+                    if (!isset($_GET['type'])) {
+                        //Display all categories
+                        $sql = "SELECT * FROM product WHERE 1";
 
-                $database = "select * from product";
-                $record = mysqli_query($con, $database);
-                $id = 0;
-                while ($row = mysqli_fetch_assoc($record)) {
-                    $id++;
-                    $path = $row['url'];
-                    $name = $row['name'];
-                    $author = $row['author'];
-                    $type = $row['type'];
+                        if ($stmt = $mysqli->prepare($sql)) {
+                            if ($stmt->execute()) {
+                                $stmt->store_result();
+
+                                $stmt->bind_result($id, $name, $author, $type, $url, $price);
+                                while ($stmt->fetch()) {
                 ?>
-                    <div class="col-md-4 ">
-                        <div class="work-box animate__animated animate__fadeInLeftBig">
-                            <a href="detail.php?id=<?php echo $id?>" data-gall="portfolioGallery" class="venobox">
-                                <div class="work-img text-center">
-                                    <?php echo '<img src="' . $path . '" alt="" class="img-fluid">' ?>
-                                </div>
-                            </a>
-                            <div class="work-content">
-                                <div class="row">
-                                    <div class="col-sm-8">
-                                        <h2 class="w-title font-weight-bold"><?php echo $name ?></h2>
-                                        <p>Description: <?php echo $type ?></p>
-                                        <div class="w-more">
-                                            <span class="w-category">Price</span> - <span>15$</span>
+                                    <div class="col-md-4 ">
+                                        <div class="work-box animate__animated animate__fadeInLeftBig">
+                                            <a href="detail.php?id=<?php echo $id ?>" data-gall="portfolioGallery" class="venobox">
+                                                <div class="work-img text-center">
+                                                    <?php echo '<img src="' . $url . '" alt="" class="img-fluid">' ?>
+                                                </div>
+                                            </a>
+                                            <div class="work-content">
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <h2 class="w-title font-weight-bold"><?php echo $name ?></h2>
+                                                        <p>Description: <?php echo $type ?></p>
+                                                        <div class="w-more">
+                                                            <span class="w-category">Price</span> - <span><?php echo $price; ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="w-like">
+                                                            <button class="btn btn-rounded btn-outline-primary" onclick="directDetail(<?php echo $id ?>)"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="w-like">
-                                            <button class="btn btn-rounded btn-outline-primary" onclick="directDetail(<?php echo $id?>)"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <?php
+                                }
+                            }
+                        }
+                    } else //Case display with type
+                    {
+                        $type = $_GET['type'];
 
-                    </div>
+                        $sql = "SELECT * FROM product WHERE type=?";
+                        if ($stmt = $mysqli->prepare($sql)) {
+                            $stmt->bind_param('s', $param_type);
+                            $param_type = $type;
+
+                            if ($stmt->execute()) {
+                                $stmt->store_result();
+
+                                $stmt->bind_result($id, $name, $author, $type, $url, $price);
+                                if ($stmt->num_rows == 0) {
+                                ?>
+                                    <div class="container">
+                                        <h2 style="font-style:italic;">No result</h2>
+                                    </div>
+                                <?php
+                                }
+                                while ($stmt->fetch()) {
+                                ?>
+                                    <div class="col-md-4 ">
+                                        <div class="work-box animate__animated animate__fadeInLeftBig">
+                                            <a href="detail.php?id=<?php echo $id ?>" data-gall="portfolioGallery" class="venobox">
+                                                <div class="work-img text-center">
+                                                    <?php echo '<img src="' . $url . '" alt="" class="img-fluid">' ?>
+                                                </div>
+                                            </a>
+                                            <div class="work-content">
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <h2 class="w-title font-weight-bold"><?php echo $name ?></h2>
+                                                        <p>Description: <?php echo $type ?></p>
+                                                        <div class="w-more">
+                                                            <span class="w-category">Price</span> - <span><?php echo $price; ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="w-like">
+                                                            <button class="btn btn-rounded btn-outline-primary" onclick="directDetail(<?php echo $id ?>)"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                 <?php
+                                }
+                            }
+                        }
+                    }
                 }
                 ?>
-
-
             </div>
         </div>
     </section>

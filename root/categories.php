@@ -86,78 +86,90 @@
             </div>
             <div class="row">
                 <div class="col-md-4 animate__animated animate__fadeInLeftBig">
-                    <div class="service-box">
-                        <div class="service-ico">
-                            <span class="ico-circle">
-                                <i class="ion-ios-book"></i>
-                            </span>
+                    <a href="products.php?type=Domestic book">
+                        <div class="service-box">
+                            <div class="service-ico">
+                                <span class="ico-circle">
+                                    <i class="ion-ios-book"></i>
+                                </span>
+                            </div>
+                            <div class="service-content">
+                                <h2 class="s-title">Domestic books</h2>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h2 class="s-title">Domestic books</h2>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4 animate__animated animate animate__fadeInDownBig">
-                    <div class="service-box">
-                        <div class="service-ico">
-                            <span class="ico-circle">
-                                <i class="ion-ios-bookmarks"></i>
-                            </span>
+                    <a href="products.php?type=International">
+                        <div class="service-box">
+                            <div class="service-ico">
+                                <span class="ico-circle">
+                                    <i class="ion-ios-bookmarks"></i>
+                                </span>
+                            </div>
+                            <div class="service-content">
+                                <h2 class="s-title">International books</h2>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h2 class="s-title">International books</h2>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInRightBig">
-                    <div class="service-box">
-                        <div class="service-ico">
-                            <span class="ico-circle">
-                                <i class="ion-ios-camera"></i>
-                            </span>
+                    <a href="products.php?type=Electronics">
+                        <div class="service-box">
+                            <div class="service-ico">
+                                <span class="ico-circle">
+                                    <i class="ion-ios-camera"></i>
+                                </span>
+                            </div>
+                            <div class="service-content">
+                                <h2 class="s-title">Electronics</h2>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h2 class="s-title">Electronics</h2>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 animate__animated animate__fadeInLeftBig">
-                    <div class="service-box">
-                        <div class="service-ico">
-                            <span class="ico-circle">
-                                <i class="ion-android-car"></i>
-                            </span>
+                    <a href="products.php?type=Souvenirs">
+                        <div class="service-box">
+                            <div class="service-ico">
+                                <span class="ico-circle">
+                                    <i class="ion-android-car"></i>
+                                </span>
+                            </div>
+                            <div class="service-content">
+                                <h2 class="s-title">Toys</h2>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h2 class="s-title">Toys</h2>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInUpBig">
-                    <div class="service-box">
-                        <div class="service-ico">
-                            <span class="ico-circle">
-                                <i class="ion-calculator"></i>
-                            </span>
+                    <a href="products.php?type=Stationary">
+                        <div class="service-box">
+                            <div class="service-ico">
+                                <span class="ico-circle">
+                                    <i class="ion-calculator"></i>
+                                </span>
+                            </div>
+                            <div class="service-content">
+                                <h2 class="s-title">Stationary</h2>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h2 class="s-title">Stationary</h2>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4 animate__animated animate__fadeInRightBig">
-                    <div class="service-box">
-                        <div class="service-ico">
-                            <span class="ico-circle">
-                                <i class="ion-calendar"></i>
-                            </span>
+                    <a href="products.php?type=Toys">
+                        <div class="service-box">
+                            <div class="service-ico">
+                                <span class="ico-circle">
+                                    <i class="ion-calendar"></i>
+                                </span>
+                            </div>
+                            <div class="service-content">
+                                <h2 class="s-title">souvenirs</h2>
+                            </div>
                         </div>
-                        <div class="service-content">
-                            <h2 class="s-title">souvenirs</h2>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

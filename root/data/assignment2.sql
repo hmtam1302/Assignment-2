@@ -113,4 +113,4 @@ INSERT INTO comment(product_id, username, time, detail) VALUES
 (1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
 (1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
 (1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
-(1,'tri.hobknetid','2020-12-27',"Lorem ispum");
+(1,'tri.hobknetid','2020-12-27',"Lorem ispum");     
