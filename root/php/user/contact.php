@@ -126,19 +126,29 @@
                                                 Get in Touch
                                             </h5>
                                         </div>
+                                        <?php
+                                        require_once "config.php";
+
+                                        //Display information
+                                        $sql = "SELECT * FROM information";
+
+                                        if ($stmt = $mysqli->prepare($sql)) 
+                                        {
+                                        if ($stmt->execute()) {
+                                            $stmt->store_result();
+
+                                            $stmt->bind_result($detail, $address, $phone, $email);
+                                        
+                                            while ($stmt->fetch()) {
+                                        ?>
                                         <div>
                                             <p class="lead">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum
-                                                dolorem soluta quidem
-                                                expedita aperiam aliquid at.
-                                                Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione
-                                                nobis
-                                                mollitia inventore?
+                                                <?php echo $detail ?>
                                             </p>
                                             <ul class="list-icon">
-                                                <li><span class="material-icons">location_on</span> Dormitory Zone A - Linh Trung Ward - Thu Duc District - <br>Ho Chi Minh City - Vietnam</li>
-                                                <li><span class="material-icons">call</span> (+84) 81 647 7215</li>
-                                                <li><span class="material-icons">email</span>tinh.hoangbknetid@hcmut.edu.vn </li>
+                                                <li><span class="material-icons">location_on</span> <?php  echo $address?></li>
+                                                <li><span class="material-icons">call</span><?php echo $phone ?></li>
+                                                <li><span class="material-icons">email</span><?php echo $email ?></li>
                                             </ul>
                                         </div>
                                         <div class="socials">
@@ -149,6 +159,11 @@
                                                 <li><a href="https://pinterest.com/"><span class="ico-circle"><i class="fab fa-pinterest-p"></i></span></a></li>
                                             </ul>
                                         </div>
+                                        <?php
+                                                                    }
+                                                                }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
