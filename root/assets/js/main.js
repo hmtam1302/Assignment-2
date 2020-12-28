@@ -311,3 +311,22 @@ function sendComment(id) {
         }
     )
 }
+
+function searchProducts(e) {
+    var value = document.getElementById("searchText").value;
+    if (value == "") return false;
+    if (e.keyCode === 13) {
+        //Search for products here
+        var action = "products.php?action=search&value=" + value;
+        window.location.href = action;
+    }
+    return false;
+}
+
+function searchButton() {
+    var value = document.getElementById("searchText").value;
+    if (value == "") return false;
+    //Search for products here
+    var action = "products.php?action=search&value=" + value;
+    window.location.href = action;
+}

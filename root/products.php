@@ -76,8 +76,8 @@
                                 Products
                             </h3>
                             <div class="searchBox d-flex align-items-center">
-                                <input class="searchInput" type="text" name="" placeholder="Search">
-                                <button class="searchButton" href="#">
+                                <input class="searchInput" type="text" name="searchText" id="searchText" placeholder="Input name, type, author, price" onkeypress="searchProducts(event)">
+                                <button class="searchButton" onclick="searchButton()">
                                     <i class="material-icons">
                                         search
                                     </i>
@@ -151,7 +151,7 @@
                                 if ($stmt->num_rows == 0) {
                                 ?>
                                     <div class="container">
-                                        <h2 style="font-style:italic;">No result</h2>
+                                        <h2 style="font-style:italic;"  class="text-info">No result</h2>
                                     </div>
                                 <?php
                                 }
@@ -182,8 +182,60 @@
                                             </div>
                                         </div>
                                     </div>
-                <?php
+                            <?php
                                 }
+                            }
+                        }
+                    }
+                } else {
+                    $value = $_GET['value'];
+                    $value = "%" . $value . "%";
+
+                    $sql = "SELECT * FROM product WHERE name LIKE ? OR author LIKE ? OR type LIKE ? OR price LIKE ?";
+                    if ($stmt = $mysqli->prepare($sql)) {
+                        $stmt->bind_param('ssss', $param_name, $param_author, $param_type, $param_price);
+                        $param_name = $value;
+                        $param_author = $value;
+                        $param_type = $value;
+                        $param_price = $value;
+
+                        if ($stmt->execute()) {
+                            $stmt->store_result();
+
+                            $stmt->bind_result($id, $name, $author, $type, $url, $price);
+                            ?>
+                            <div class="container">
+                                <h2 style="font-style:italic;" class="text-info"><?php echo $stmt->num_rows()?> results</h2>
+                            </div>
+                            <?php
+                            while ($stmt->fetch()) {
+                            ?>
+                                <div class="col-md-4 ">
+                                    <div class="work-box animate__animated animate__fadeInLeftBig">
+                                        <a href="detail.php?id=<?php echo $id ?>" data-gall="portfolioGallery" class="venobox">
+                                            <div class="work-img text-center">
+                                                <?php echo '<img src="' . $url . '" alt="" class="img-fluid">' ?>
+                                            </div>
+                                        </a>
+                                        <div class="work-content">
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <h2 class="w-title font-weight-bold"><?php echo $name ?></h2>
+                                                    <p>Description: <?php echo $type ?></p>
+                                                    <div class="w-more">
+                                                        <span class="w-category">Price</span> - <span><?php echo $price; ?></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="w-like">
+                                                        <button class="btn btn-rounded btn-outline-primary" onclick="directDetail(<?php echo $id ?>)"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                <?php
                             }
                         }
                     }
