@@ -110,13 +110,14 @@
                                                             sent. Thank you!
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 text-center">
-                                                        <button class="btn btn-outline-primary btn-lg btn-rounded" onclick="return validateData()">Send
-                                                            Message
-                                                        </button>
-                                                    </div>
+
                                                 </div>
                                             </form>
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-outline-primary btn-lg btn-rounded" onclick="return validateData()">Send
+                                                    Message
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
