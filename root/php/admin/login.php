@@ -25,7 +25,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="font-weight-bold">Admin login</h1>
+                    <h1 class="font-weight-bold text-info">Admin login</h1>
                 </div>
                 <div class="card-body">
                     <form>
