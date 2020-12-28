@@ -77,7 +77,7 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="user.php" class="sidebar-nav-link  active  ">
+                <a href="user.php" class="sidebar-nav-link">
                     <div>
                         <i class="fas fa-user-alt"></i>
                     </div>
@@ -85,7 +85,7 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="staff.php" class="sidebar-nav-link">
+                <a href="staff.php" class="sidebar-nav-link active">
                     <div>
                         <i class="fas fa-user-friends"></i>
                     </div>
@@ -117,12 +117,12 @@
     <div class="wrapper">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="counter bg-primary">
+                <div class="counter bg-warning">
                     <p>
-                        <i class="fas fa-user-alt"></i>
+                        <i class="fas fa-user-friends"></i>
                     </p>
-                    <h3>100</h3>
-                    <p>Users</p>
+                    <h3>4</h3>
+                    <p>Staff</p>
                 </div>
             </div>
         </div>
@@ -131,62 +131,48 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 id="titleTable">
-                            User table
+                            Staff table
                         </h3>
                     </div>
                     <div class="card-content">
                         <table class="table-stripped">
                             <tr>
                                 <th>ID</th>
-                                <th>User name</th>
-                                <th>Password</th>
-                                <th>Email</th>
                                 <th>Full name</th>
-                                <th>URL</th>
-                                <th>Telephone</th>
-                                <th>Date of birth</th>
+                                <th>Profile</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>HTML</th>
+                                <th>CSS</th>
+                                <th>PHP</th>
+                                <th>JS</th>
+                                <th>Detail</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                             <tr>
                                 <td>1</td>
-                                <td>huynhhai</td>
-                                <td>123456</td>
-                                <td>conghai20@gmail.com</td>
                                 <td>Huỳnh Công Hải</td>
-                                <td>fb.com/haryo.hh</td>
-                                <td>0942239400</td>
-                                <td>2000-01-21</td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>huynhhai</td>
-                                <td>123456</td>
+                                <td>Full stack developer</td>
                                 <td>conghai20@gmail.com</td>
-                                <td>Huỳnh Công Hải</td>
-                                <td>fb.com/haryo.hh</td>
                                 <td>0942239400</td>
-                                <td>2000-01-21</td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>huynhhai</td>
-                                <td>123456</td>
-                                <td>conghai20@gmail.com</td>
-                                <td>Huỳnh Công Hải</td>
-                                <td>fb.com/haryo.hh</td>
-                                <td>0942239400</td>
-                                <td>2000-01-21</td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteUser(1)">Delete</button></td>
+                                <td>75</td>
+                                <td>75</td>
+                                <td>50</td>
+                                <td>80</td>
+                                <td>Curabitur non nulla sit amet nisl tempus convallis
+                                    quis ac lectus. Curabitur arcu erat, accumsan
+                                    id imperdiet et, porttitor at sem. Praesent sapien
+                                    massa, convallis a pellentesque nec, egestas non nisi.
+                                    Nulla porttitor accumsan tincidunt.
+                                    Mauris blandit aliquet el
+                                </td>
+                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#staffEditModal">Edit</button></td>
+                                <td><button class="btn btn-danger" onclick="deleteStaff(id)">Delete</button></td>
                             </tr>
                         </table>
                         <div class="col d-flex justify-content-end">
-                            <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#userModal">Add new user</button>
+                            <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#staffModal">Add new staff</button>
                         </div>
                     </div>
                 </div>
@@ -195,11 +181,11 @@
     </div>
 
     <!-- Modal add user-->
-    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
+    <div class="modal fade" id="staffModal" tabindex="-1" role="dialog" aria-labelledby="staffModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Add new user</h5>
+                    <h5 class="modal-title" id="modalLabel">Add new staff</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -214,11 +200,18 @@
                             <span class="text-danger" id="idErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="username" class="col-2 col-form-label"><strong>Username</strong></label>
+                            <label for="name" class="col-2 col-form-label"><strong>Full name</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="username">
+                                <input class="form-control" type="text" value="" id="name">
                             </div>
-                            <span class="text-danger" id="usernameErr"></span>
+                            <span class="text-danger" id="nameErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="profile" class="col-2 col-form-label"><strong>Profile</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="profile">
+                            </div>
+                            <span class="text-danger" id="profileErr"></span>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="email" class="col-2 col-form-label"><strong>Email</strong></label>
@@ -228,49 +221,56 @@
                             <span class="text-danger" id="emailErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="full-name" class="col-2 col-form-label"><strong>Full name</strong></label>
+                            <label for="phone" class="col-2 col-form-label"><strong>Phone</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="full-name">
+                                <input class="form-control" type="text" value="" id="phone">
                             </div>
-                            <span class="text-danger" id="fullnameErr"></span>
+                            <span class="text-danger" id="phoneErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="url" class="col-2 col-form-label"><strong>URL</strong></label>
+                            <label for="html" class="col-2 col-form-label"><strong>HTML</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="url" value="" id="url">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="html">
                             </div>
-                            <span class="text-danger" id="urlErr"></span>
+                            <span class="text-danger" id="htmlErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="telephone" class="col-2 col-form-label"><strong>Telephone</strong></label>
+                            <label for="css" class="col-2 col-form-label"><strong>CSS</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="telephone">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="css">
                             </div>
-                            <span class="text-danger" id="telephoneErr"></span>
+                            <span class="text-danger" id="cssErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="birthday" class="col-2 col-form-label"><strong>Birthday</strong></label>
+                            <label for="php" class="col-2 col-form-label"><strong>PHP</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="url" value="" id="birthday">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="php">
                             </div>
-                            <span class="text-danger" id="birthdayErr"></span>
+                            <span class="text-danger" id="phpErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="details" class="col-2 col-form-label"><strong>Detail</strong></label>
+                            <div class="col-10">
+                                <textarea class="form-control" type="" value="" id="detail"></textarea>
+                            </div>
+                            <span class="text-danger" id="detailErr"></span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="addUser()">Add</button>
+                    <button type="button" class="btn btn-primary" onclick="addStaff()">Add</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal edit user-->
-    <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModal" aria-hidden="true">
+    <!-- Modal edit staff-->
+    <div class="modal fade" id="staffEditModal" tabindex="-1" role="dialog" aria-labelledby="staffEditModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Edit user</h5>
+                    <h5 class="modal-title" id="modalLabel">Edit staff</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -280,16 +280,23 @@
                         <div class="form-group row align-items-center">
                             <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="OK" id="id-edit">
+                                <input class="form-control" type="text" value="" id="id-edit">
                             </div>
                             <span class="text-danger" id="idErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="username-edit" class="col-2 col-form-label"><strong>Username</strong></label>
+                            <label for="name-edit" class="col-2 col-form-label"><strong>Full name</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="huynhhai" id="username-edit">
+                                <input class="form-control" type="text" value="" id="name-edit">
                             </div>
-                            <span class="text-danger" id="usernameErr"></span>
+                            <span class="text-danger" id="nameErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="profile-edit" class="col-2 col-form-label"><strong>Profile</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="profile-edit">
+                            </div>
+                            <span class="text-danger" id="profileErr"></span>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="email-edit" class="col-2 col-form-label"><strong>Email</strong></label>
@@ -299,38 +306,45 @@
                             <span class="text-danger" id="emailErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="full-name-edit" class="col-2 col-form-label"><strong>Full name</strong></label>
+                            <label for="phone-edit" class="col-2 col-form-label"><strong>Phone</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="full-name-edit">
+                                <input class="form-control" type="text" value="" id="phone-edit">
                             </div>
-                            <span class="text-danger" id="fullnameErr"></span>
+                            <span class="text-danger" id="phoneErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="url-edit" class="col-2 col-form-label"><strong>URL</strong></label>
+                            <label for="html-edit" class="col-2 col-form-label"><strong>HTML</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="url" value="" id="url-edit">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="html-edit">
                             </div>
-                            <span class="text-danger" id="urlErr"></span>
+                            <span class="text-danger" id="htmlErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="telephone-edit" class="col-2 col-form-label"><strong>Telephone</strong></label>
+                            <label for="css-edit" class="col-2 col-form-label"><strong>CSS</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="telephone-edit">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="css-edit">
                             </div>
-                            <span class="text-danger" id="telephoneErr"></span>
+                            <span class="text-danger" id="cssErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="birthday-edit" class="col-2 col-form-label"><strong>Birthday</strong></label>
+                            <label for="php-edit" class="col-2 col-form-label"><strong>PHP</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="url" value="" id="birthday-edit">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="php-edit">
                             </div>
-                            <span class="text-danger" id="birthdayErr"></span>
+                            <span class="text-danger" id="phpErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="details-edit" class="col-2 col-form-label"><strong>Detail</strong></label>
+                            <div class="col-10">
+                                <textarea class="form-control" type="" value="" id="detail-edit"></textarea>
+                            </div>
+                            <span class="text-danger" id="detailErr"></span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="editUser(oldId)">Add</button>
+                    <button type="button" class="btn btn-primary" onclick="editStaff(oldId)">Add</button>
                 </div>
             </div>
         </div>
