@@ -145,6 +145,7 @@
                                 <th>Price</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             <tr>
                                 <td>1</td>
@@ -153,8 +154,39 @@
                                 <td>International</td>
                                 <td>/assets/img/internationalbook/work-1.jpg</td>
                                 <td>15</td>
+                                <th><button class="btn btn-info" data-toggle="collapse" data-target="#comment1" aria-expanded="false" aria-controls="comment1">View comment</button></th>
                                 <td><button class="btn btn-primary" data-toggle="modal" data-target="#productEditModal">Edit</button></td>
                                 <td><button class="btn btn-danger" onclick="deleteProduct(id)">Delete</button></td>
+                            </tr>
+                            <!---Comment-->
+                            <tr>
+                                <th colspan="9">
+                                    <div class="card collapse" id="comment1">
+                                        <div class="card-header">
+                                            <h3 id="titleTable">
+                                                Comment
+                                            </h3>
+                                        </div>
+                                        <div class="card-content">
+                                            <table class="table-stripped">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Username</th>
+                                                    <th>Time</th>
+                                                    <th>Detail</th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>tri.hobknetid</td>
+                                                    <td>2020-12-29</td>
+                                                    <td>Như cc</td>
+                                                    <td><button class="btn btn-danger" onclick="deleteComment(id)">Delete</button></td>
+                                                </tr>>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </th>
                             </tr>
                         </table>
                         <div class="col d-flex justify-content-end">

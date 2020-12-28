@@ -91,7 +91,7 @@ if ($stmt = $mysqli->prepare($sql)) {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="background-color:white;">
                 <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                <li class="breadcrumb-item"><a href="categories.php">Categories</a></li>
+                <li class="breadcrumb-item"><a href="products.php">Products</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $name; ?></li>
             </ol>
         </nav>
