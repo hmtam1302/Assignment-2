@@ -97,7 +97,7 @@ if ($action == 'logout') {
             echo "Something went wrong!!!";
         }
     }
-}   else if ($action=="insertcontact"){
+}   else if ($action=="contact"){
     
     $name = $_GET['name'];
     $email = $_GET['email'];

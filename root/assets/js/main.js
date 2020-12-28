@@ -29,18 +29,20 @@ function validateData() {
     var flag3 = checkSubject(document.getElementById("subject"), document.getElementById("validateSubject"))
     var flag4 = checkMsg(document.getElementById("message"), document.getElementById("validateMessage"));
     if (flag1 && flag2 && flag3 && flag4) {
-        var load = document.getElementById("message-box");
-        load.style.display = "block";
+        
         var name = "&name=" + document.getElementById("name").value;
         var email = "&email=" + document.getElementById("email").value;
         var subject = "&subject=" + document.getElementById("subject").value;
         var message = "&message=" + document.getElementById("message").value;
-        var action = "action.php?action=insertcontact" + name+ email + subject + message;
+        var action = "action.php?action=contact" + name+ email + subject + message;
        
         $.get(
             action,
             function (data, status) {
-                alert(data);
+                if (data == "Send message successfully!!!"){
+                    document.getElementById("message-box").style.display = "block";
+                }
+                else alert(data);
             }
         );
         return false;
