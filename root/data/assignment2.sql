@@ -114,3 +114,12 @@ INSERT INTO comment(product_id, username, time, detail) VALUES
 (1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
 (1,'tri.hobknetid','2020-12-27',"Lorem ispum"),
 (1,'tri.hobknetid','2020-12-27',"Lorem ispum");     
+drop table if exists contact;
+create table contact(
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name varchar(255),
+email varchar(255),
+subject varchar(255),
+message varchar(255)
+
+);     

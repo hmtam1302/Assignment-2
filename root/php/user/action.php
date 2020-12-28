@@ -97,7 +97,28 @@ if ($action == 'logout') {
             echo "Something went wrong!!!";
         }
     }
+}   else if ($action=="insertcontact"){
+    
+    $name = $_GET['name'];
+    $email = $_GET['email'];
+    $subject = $_GET['subject'];
+    $message = $_GET['message'];
+    $sql = "INSERT INTO contact(name, email, subject, message) VALUES (?, ?, ?, ?)";
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param("ssss", $name, $email, $subject, $message);
+
+        $param_name = $name;
+        $param_email = $email;
+        $param_subject = $subject;
+        $param_message = $message;
+        if ($stmt->execute()) {
+            echo "Send message successfully!!!";
+        } else {
+            echo "Something went wrong!!!";
+        }
+    }
 }
+
 
 function changePassword($mysqli, $password, $username)
 {
