@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['admin'])) {
+    header("Location: dashboard.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +23,9 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-----JS file----->
+    <script src="/assets/js/admin.js"></script>
     <title>Admin login</title>
 </head>
 
@@ -36,10 +45,10 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter password">
+                            <input type="password" class="form-control" id="password" placeholder="Enter password" onkeyup="checkEnter(event)">
                         </div>
-                        <button type="submit" class="btn btn-primary">Log in</button>
                     </form>
+                    <button class="btn btn-primary" onclick="login()">Log in</button>
                 </div>
             </div>
         </div>

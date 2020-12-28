@@ -54,7 +54,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="user-img" style="position: absolute;left: auto;">
                     <a class="dropdown-item" href="#"><i class="fas fa-cog" style="padding-right: 20px;"></i>Settings</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt" style="padding-right: 20px;"></i>Log out</a>
+                    <a class="dropdown-item" href="#" onclick="logOut()"><i class="fas fa-sign-out-alt" style="padding-right: 20px;"></i>Log out</a>
                 </div>
             </li>
         </ul>
