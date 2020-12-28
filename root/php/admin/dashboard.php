@@ -149,7 +149,7 @@
                         <i class="fas fa-comment"></i>
                     </p>
                     <h3>50</h3>
-                    <p>Contact</p>
+                    <p>Contacts</p>
                 </div>
             </div>
         </div>

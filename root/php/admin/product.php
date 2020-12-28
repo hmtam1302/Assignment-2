@@ -131,7 +131,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 id="titleTable">
-                            Staff table
+                            Product table
                         </h3>
                     </div>
                     <div class="card-content">
