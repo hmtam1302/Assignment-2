@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--Style file-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 
@@ -151,7 +151,7 @@
                                 if ($stmt->num_rows == 0) {
                                 ?>
                                     <div class="container">
-                                        <h2 style="font-style:italic;"  class="text-info">No result</h2>
+                                        <h2 style="font-style:italic;" class="text-info">No result</h2>
                                     </div>
                                 <?php
                                 }
@@ -205,7 +205,7 @@
                             $stmt->bind_result($id, $name, $author, $type, $url, $price);
                             ?>
                             <div class="container">
-                                <h2 style="font-style:italic;" class="text-info"><?php echo $stmt->num_rows()?> results</h2>
+                                <h2 style="font-style:italic;" class="text-info"><?php echo $stmt->num_rows() ?> results</h2>
                             </div>
                             <?php
                             while ($stmt->fetch()) {

@@ -37,8 +37,8 @@ if ($stmt = $mysqli->prepare($sql)) {
 
 
     <!--Style file-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
@@ -148,7 +148,7 @@ if ($stmt = $mysqli->prepare($sql)) {
                         ?>
                             <div class="card border-info mb-3" style="width: 100%;">
                                 <div class="card-header">
-                                    <img src="assets/img/user.png">
+                                    <img src="/assets/img/user.png">
                                     <p class="font-weight-bold" style="margin-bottom: 0; margin-left: 100px; margin-top: 20px;"><?php echo $username; ?></p>
                                     <p style="font-style:italic;margin-left: 100px;"><?php echo $time; ?></p>
                                 </div>

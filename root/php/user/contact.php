@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--Style file-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
@@ -63,7 +63,7 @@
         </div>
     </nav>
     <!--Conntact Section-->
-    <div class="section d-flex justify-content-center" id="contact-section" style="background-image: url(assets/img/overlay-bg.jpg)">
+    <div class="section d-flex justify-content-center" id="contact-section" style="background-image: url(/assets/img/overlay-bg.jpg)">
         <section class="contact">
             <div class="overlay-mf"></div>
             <div class="container">

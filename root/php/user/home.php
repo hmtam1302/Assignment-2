@@ -16,8 +16,8 @@
 
 
     <!--Style file-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->

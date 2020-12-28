@@ -112,8 +112,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <!--Style file-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <!--Animation.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -121,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Sign up</title>
 </head>
 
-<body data-new-gr-c-s-check-loaded="8.867.0" style="background-image: url('assets/img/login-bg.jpg'); background-size: cover;">
+<body data-new-gr-c-s-check-loaded="8.867.0" style="background-image: url('/assets/img/login-bg.jpg'); background-size: cover;">
     <!--Header / Navbar-->
     <nav id="mainNav" class="navbar navbar-expand-md fixed-top animate__animated animate__slideInDown">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
@@ -168,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <!-- fix -->
                     <h1 class="font-weight-bold">Create Account</h1>
-                    <img src="assets/img/hcmut.png">
+                    <img src="/assets/img/hcmut.png">
 
                     <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?> " style="margin-bottom: 0;">
                         <!-- fix -->
@@ -184,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>" style="margin-bottom: 0;">
                         <!-- fix -->
-                        <input type="password" name="confirm_password" class="form-control animate__animated" id="confirm-password-change" required placeholder="Confirm Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars"  onkeyup="validateConfirm()" value="<?php echo $confirm_password; ?>"> <!-- fix -->
+                        <input type="password" name="confirm_password" class="form-control animate__animated" id="confirm-password-change" required placeholder="Confirm Password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" onkeyup="validateConfirm()" value="<?php echo $confirm_password; ?>"> <!-- fix -->
                     </div>
                     <span class="text-danger mb-3" id="confirmErr"><?php echo $confirm_password_err; ?></span> <!-- fix -->
 
