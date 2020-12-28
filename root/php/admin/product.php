@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Dashboard</title>
+    <title>Product</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
@@ -67,7 +67,7 @@
     <div class="sidebar">
         <ul class="sidebar-nav">
             <li class="sidebar-nav-item">
-                <a href="dashboard.php" class="sidebar-nav-link active">
+                <a href="dashboard.php" class="sidebar-nav-link">
                     <div>
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
-                <a href="product.php" class="sidebar-nav-link">
+                <a href="product.php" class="sidebar-nav-link active">
                     <div>
                         <i class="fas fa-dice-d6"></i>
                     </div>
@@ -115,25 +115,7 @@
 
     <!-- main content -->
     <div class="wrapper">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="counter bg-primary">
-                    <p>
-                        <i class="fas fa-user-alt"></i>
-                    </p>
-                    <h3>100</h3>
-                    <p>Users</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="counter bg-warning">
-                    <p>
-                        <i class="fas fa-user-friends"></i>
-                    </p>
-                    <h3>4</h3>
-                    <p>Staff</p>
-                </div>
-            </div>
+        <div class="row d-flex justify-content-center">
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="counter bg-success">
                     <p>
@@ -143,84 +125,40 @@
                     <p>Products</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="counter bg-danger">
-                    <p>
-                        <i class="fas fa-comment"></i>
-                    </p>
-                    <h3>50</h3>
-                    <p>Contact</p>
-                </div>
-            </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 id="titleTable">
-                            Profile
+                            Staff table
                         </h3>
                     </div>
                     <div class="card-content">
-                        <table>
+                        <table class="table-stripped">
                             <tr>
-                                <th>Username</th>
-                                <td>huynhhai</td>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Author</th>
+                                <th>Type</th>
+                                <th>URL</th>
+                                <th>Price</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                             <tr>
-                                <th>Full Name</th>
-                                <td>Huỳnh Công Hải</td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td>conghai20@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th>Url</th>
-                                <td>fb.com/haryo.hh</td>
-                            </tr>
-                            <tr>
-                                <th>Birthday</th>
-                                <td>2000-01-21</td>
-                            </tr>
-                        </table>
-                        <div class="col d-flex justify-content-end">
-                            <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#profileModal">Edit profile</button>
-                            <button class="btn btn-outline-primary mr-2" data-toggle="modal" data-target="#passwordModal">Change password</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 id="titleTable">
-                            Information
-                        </h3>
-                    </div>
-                    <div class="card-content">
-                        <table>
-                            <tr>
-                                <th>Address</th>
-                                <td>huynhhai</td>
-                            </tr>
-                            <tr>
-                                <th>Telephone</th>
-                                <td>Huỳnh Công Hải</td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td>conghai20@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th>Detail</th>
-                                <td>fb.com/haryo.hh</td>
+                                <td>1</td>
+                                <td>A Madness of Sunshine</td>
+                                <td>Nalini singh</td>
+                                <td>International</td>
+                                <td>/assets/img/internationalbook/work-1.jpg</td>
+                                <td>15</td>
+                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#productEditModal">Edit</button></td>
+                                <td><button class="btn btn-danger" onclick="deleteProduct(id)">Delete</button></td>
                             </tr>
                         </table>
                         <div class="col d-flex justify-content-end">
-                            <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#informationModal">Edit information</button>
+                            <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#productModal">Add new product</button>
                         </div>
                     </div>
                 </div>
@@ -228,12 +166,12 @@
         </div>
     </div>
 
-    <!-- Modal change profile-->
-    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModal" aria-hidden="true">
+    <!-- Modal add user-->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Change profile</h5>
+                    <h5 class="modal-title" id="modalLabel">Add new product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -241,49 +179,63 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group row align-items-center">
-                            <label for="full-name" class="col-2 col-form-label"><strong>Full name</strong></label>
+                            <label for="id" class="col-2 col-form-label"><strong>ID</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="full-name">
+                                <input class="form-control" type="text" value="" id="id">
+                            </div>
+                            <span class="text-danger" id="idErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="name" class="col-2 col-form-label"><strong>Name</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="name">
                             </div>
                             <span class="text-danger" id="nameErr"></span>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label for="email-profile" class="col-2 col-form-label"><strong>Email</strong></label>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="author" class="col-2 col-form-label"><strong>Author</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="email" value="" id="email-profile">
+                                <input class="form-control" type="text" value="" id="author">
                             </div>
-                            <span class="text-danger" id="emailErr"></span>
+                            <span class="text-danger" id="authorErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="type" class="col-2 col-form-label"><strong>Type</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="type">
+                            </div>
+                            <span class="text-danger" id="typeErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="url-profile" class="col-2 col-form-label"><strong>URL</strong></label>
+                            <label for="url" class="col-2 col-form-label"><strong>URL</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="url" value="" id="url-profile">
+                                <input class="form-control" type="text" value="" id="url">
                             </div>
                             <span class="text-danger" id="urlErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="birthday" class="col-2 col-form-label"><strong>Birthday</strong></label>
+                            <label for="price" class="col-2 col-form-label"><strong>Price</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="date" value="" id="birthday">
+                                <input class="form-control" type="number" min="0" step="0.01" value="" id="price">
                             </div>
-                            <span class="text-danger" id="birthdayErr"></span>
+                            <span class="text-danger" id="priceErr"></span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="changeProfile()">Save changes</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">Add</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal change password-->
-    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal" aria-hidden="true">
+    <!-- Modal add user-->
+    <div class="modal fade" id="productEditModal" tabindex="-1" role="dialog" aria-labelledby="productEditModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Change password</h5>
+                    <h5 class="modal-title" id="modalLabel">Edit product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -291,78 +243,52 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group row align-items-center">
-                            <label for="password-change" class="col-2 col-form-label"><strong>Current password</strong></label>
+                            <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="password" value="" id="password-change">
+                                <input class="form-control" type="text" value="" id="id-edit">
                             </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="new-password-change" class="col-2 col-form-label"><strong>New password</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="password" value="" id="new-password-change">
-                            </div>
+                            <span class="text-danger" id="idErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
-                            <label for="confirm-password-change" class="col-2 col-form-label"><strong>Confirm password</strong></label>
+                            <label for="name-edit" class="col-2 col-form-label"><strong>Name</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="password" value="" id="confirm-password-change" onkeyup="validateConfirm()">
+                                <input class="form-control" type="text" value="" id="name-edit">
                             </div>
-                            <span class="text-danger" id="confirmErr"></span>
+                            <span class="text-danger" id="nameErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="author-edit" class="col-2 col-form-label"><strong>Author</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="author-edit">
+                            </div>
+                            <span class="text-danger" id="authorErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="type-edit" class="col-2 col-form-label"><strong>Type</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="type-edit">
+                            </div>
+                            <span class="text-danger" id="typeErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="url-edit" class="col-2 col-form-label"><strong>URL</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="" id="url-edit">
+                            </div>
+                            <span class="text-danger" id="urlErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="price-edit" class="col-2 col-form-label"><strong>Price</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="number" min="0" step="0.01" value="" id="price-edit">
+                            </div>
+                            <span class="text-danger" id="priceErr"></span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="changePassword()">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- Modal change profile-->
-        <div class="modal fade" id="informationModal" tabindex="-1" role="dialog" aria-labelledby="informationModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Change information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="address" class="col-2 col-form-label"><strong>Address</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="address">
-                            </div>
-                            <span class="text-danger" id="addressErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="telephone" class="col-2 col-form-label"><strong>Telephone</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="telephone">
-                            </div>
-                            <span class="text-danger" id="telephoneErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="email-info" class="col-2 col-form-label"><strong>Email</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="email" value="" id="email-info">
-                            </div>
-                            <span class="text-danger" id="emailErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="detail" class="col-2 col-form-label"><strong>Detail</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="detail">
-                            </div>
-                            <span class="text-danger" id="birthdayErr"></span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="changeInfo()">Save changes</button>
+                    <button type="button" class="btn btn-primary" onclick="editProduct(oldId)">Add</button>
                 </div>
             </div>
         </div>
