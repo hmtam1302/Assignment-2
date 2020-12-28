@@ -130,6 +130,11 @@ address varchar(255),
 phone varchar(255),
 email varchar(255)
 );
+
+INSERT INTO information(detail, address, phone, email) VALUES
+("Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum dolorem soluta quidem expedita aperiam aliquid at. Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis mollitia inventore?","Dormitory Zone A - Linh Trung Ward - Thu Duc District -
+Ho Chi Minh City - Vietnam",'(+84) 81 647 7215',"tinh.hoangbknetid@hcmut.edu.vn");
+
 -- about
 drop table if exists staff;
 create table staff(
@@ -142,9 +147,45 @@ html int,
 css int,
 php int,
 javascript int,
-detail longtext
+detail longtext,
+url varchar(255)
 );
 
+insert into staff(id,name,profile,email,phone,html,css,php,javascript,detail,url) values 
+("1","Huỳnh Công Hải","Full stack developer","hai.huynh.2101@hcmut.edu.vn",
+"(+84) 94 223 9400","75","75","50","80","Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla porttitor accumsan tincidunt.
+
+Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
+
+Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+"/assets/img/testimonial-1.jpg");
+
+insert into staff(id,name,profile,email,phone,html,css,php,javascript,detail,url) values 
+("2","Trương Minh Hiệp","Full stack developer","hiep.truongminh@hcmut.edu.vn",
+"(+84) 39 907 0916","85","65","55","70","Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla porttitor accumsan tincidunt.
+
+Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
+
+Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+"/assets/img/testimonial-2.jpg");
+
+insert into staff(id,name,profile,email,phone,html,css,php,javascript,detail,url) values 
+("3","Hoàng Vũ Tĩnh ","Back-end developer","tinh.hoangbknetid@hcmut.edu.vn",
+"(+84) 81 647 7215","55","55","85","70","Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla porttitor accumsan tincidunt.
+
+Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
+
+Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+"/assets/img/testimonial-3.jpg");
+
+insert into staff(id,name,profile,email,phone,html,css,php,javascript,detail,url) values 
+("4","Hồ Ngọc Trí","Back-end developer","tri.hobknetid@hcmut.edu.vn",
+"(+84) 97 757 0593","65","55","80","70","Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla porttitor accumsan tincidunt.
+
+Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
+
+Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.",
+"/assets/img/testimonial-4.jpg");
 -- admin
 
 DROP TABLE IF EXISTS admin;
@@ -159,3 +200,7 @@ CREATE TABLE admin (
     date_of_birth DATE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+insert into admin(id,username,password,email,full_name,telephone)
+values ("1","admin","admin","hai.huynh.2101@hcmut.edu.vn","Huỳnh Công Hải","(+84) 94 223 9400");
+
