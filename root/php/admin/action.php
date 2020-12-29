@@ -327,7 +327,7 @@ function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_
         $param_birthday = $date_of_birth;
         $param_id=$id;
         if ($stmt->execute()) {
-            return "Change profile successfully!";
+            return "Change user information successfully!";
         } else {
             return "SQL executed incorrectly!";
         }

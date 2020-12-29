@@ -146,30 +146,48 @@
                                 <th>CSS</th>
                                 <th>PHP</th>
                                 <th>JS</th>
-                                <th>Detail</th>
+                                <th class="text-align:center">Detail</th>
                                 <th></th>
                                 <th></th>
                             </tr>
+                            
+                            <?php
+                            require_once "config.php";
+
+               
+                            //Display all staff
+                            $sql = "SELECT * FROM staff where 1";
+
+                            
+
+                            if ($stmt = $mysqli->prepare($sql)) {
+                                if ($stmt->execute()) {
+                                    $stmt->store_result();
+    
+                                    $stmt->bind_result($id, $name, $profile, $email, $phone,
+                                     $html,$css,$php,$javascript,$detail,$url);
+                                    while ($stmt->fetch()) {
+                            ?>
                             <tr>
-                                <td>1</td>
-                                <td>Huỳnh Công Hải</td>
-                                <td>Full stack developer</td>
-                                <td>conghai20@gmail.com</td>
-                                <td>0942239400</td>
-                                <td>75</td>
-                                <td>75</td>
-                                <td>50</td>
-                                <td>80</td>
-                                <td>Curabitur non nulla sit amet nisl tempus convallis
-                                    quis ac lectus. Curabitur arcu erat, accumsan
-                                    id imperdiet et, porttitor at sem. Praesent sapien
-                                    massa, convallis a pellentesque nec, egestas non nisi.
-                                    Nulla porttitor accumsan tincidunt.
-                                    Mauris blandit aliquet el
-                                </td>
+                                <td><?php echo $id ?></td>
+                                <td><?php echo$name ?></td>
+                                <td><?php echo $profile ?></td>
+                                <td><?php echo $email ?></td>
+                                <td><?php echo $phone ?></td>
+                                <td><?php echo $html ?></td>
+                                <td><?php echo $css ?></td>
+                                <td><?php echo $php ?></td>
+                                <td><?php echo $javascript?></td>
+                                <td><?php echo $detail?></td>
                                 <td><button class="btn btn-primary" data-toggle="modal" data-target="#staffEditModal">Edit</button></td>
                                 <td><button class="btn btn-danger" onclick="deleteStaff(id)">Delete</button></td>
                             </tr>
+                            <?php
+                                }
+                            }
+                        }
+                            ?>
+                               
                         </table>
                         <div class="col d-flex justify-content-end">
                             <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#staffModal">Add new staff</button>

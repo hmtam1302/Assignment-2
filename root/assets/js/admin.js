@@ -232,7 +232,7 @@ function editUser() {
         { action: "edit_user", id: id, username:username, email: email, fullname:full_name,url: url, telephone: telephone, date_of_birth: date_of_birth },
         function (data, status) {
             alert(data);
-            if (data == "Change user information successfully!") window.location.href = "dashboard.php";
+            if (data == "Change user information successfully!") window.location.href = "user.php";
         }
     );
 }
