@@ -43,6 +43,109 @@ if ($action == "change_info") {
     echo deleteUser($mysqli,$id);
 }*/
 
+if ($action == "edit_product") {
+    $old_id = $_POST['old_id'];
+    $new_id = $_POST['new_id'];
+    $name = $_POST['name'];
+    $author = $_POST['author'];
+    $type = $_POST['type'];
+    $url = $_POST['url'];
+    $price = $_POST['price'];
+
+    //Check if new id exist
+    if (checkProductId($mysqli, $old_id, $new_id)) {
+        echo "New ID existed, please choose another one!";
+    } else {
+        echo changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $price);
+    }
+}
+if ($action == "delete_product") {
+    $id = $_POST['id'];
+    echo deleteProduct($mysqli, $id);
+}
+
+function deleteProduct($mysqli, $id)
+{
+    $param_id = NULL;
+    $sql = "DELETE FROM product WHERE id=?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('i', $param_id);
+
+        $param_id = $id;
+
+        if ($stmt->execute()) {
+            return "Delete product successfully!\n" . deleteCommentWithProductId($mysqli, $id);;
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+}
+
+function deleteCommentWithProductId($mysqli, $product_id)
+{
+    $param_product_id = NULL;
+    $sql = "DELETE FROM comment WHERE product_id=?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('i', $param_product_id);
+
+        $param_product_id = $product_id;
+
+        if ($stmt->execute()) {
+            return "Delete comment with product_id = " . $product_id . " successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+}
+
+function changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $price)
+{
+    $param_id = $param_name = $param_author = $param_type  = $param_url = $param_price = $id = NULL;
+    $sql = "UPDATE product SET id=?, name=?,author=?, type=?, url=?, price=? WHERE id = ?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('issssii', $param_id, $param_name, $param_author, $param_type, $param_url, $param_price, $id);
+
+        $param_id = $new_id;
+        $param_name = $name;
+        $param_author = $author;
+        $param_type  = $type;
+        $param_url = $url;
+        $param_price = $price;
+        $id = $old_id;
+
+        if ($stmt->execute()) {
+            return "Change product information successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+}
+
+function checkProductId($mysqli, $old_id, $new_id)
+{
+    $param_id = NULL;
+    if ($old_id == $new_id) return false;
+    $sql = "SELECT id FROM product WHERE id = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('i', $param_id);
+    $param_id = $new_id;
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows >= 1) {
+        return true;
+    }
+    return false;
+}
+
 
 function login($mysqli, $sql, $username, $password)
 {
@@ -199,5 +302,3 @@ function changeInfo($mysqli, $address, $phone, $email, $detail)
     echo "Error deleting record: " . $conn->error;
     }
 */
-   
-

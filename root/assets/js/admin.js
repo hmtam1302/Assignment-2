@@ -184,3 +184,37 @@ function checkEnter(e){
         }
     )
 }*/
+
+function editProduct(product_id_value) {
+    var idValue = document.getElementById('id-edit').value;
+    var nameValue = document.getElementById('name-edit').value;
+    var authorValue = document.getElementById('author-edit').value;
+    var typeValue = document.getElementById('type-edit').value;
+    var urlValue = document.getElementById('url-edit').value;
+    var priceValue = document.getElementById('price-edit').value;
+
+    $.post(
+        "action.php",
+        { action: "edit_product", old_id: product_id_value, new_id: idValue, name: nameValue, author: authorValue, type: typeValue, url: urlValue, price: priceValue },
+        function (data, status) {
+            alert(data);
+            if (data == "Change product information successfully!")
+                window.location.href = "product.php";
+        }
+    );
+}
+
+function deleteProduct(product_id) {
+
+    if (confirm("Delete this products?")) {
+        $.post(
+            "action.php",
+            { action: "delete_product", id: product_id },
+            function (data, status) {
+                alert(data);
+                if (data == "Delete product successfully!\nDelete comment with product_id = " + product_id + " successfully!")
+                    window.location.href = "product.php";
+            }
+        );
+    }
+}

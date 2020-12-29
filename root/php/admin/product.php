@@ -1,3 +1,12 @@
+<?php
+require_once "config.php";
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+}
+?>
+>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,7 +130,15 @@
                     <p>
                         <i class="fas fa-dice-d6"></i>
                     </p>
-                    <h3>51</h3>
+                    <?php
+                    $sql = "SELECT COUNT(id) FROM product";
+                    $stmt = $mysqli->prepare($sql);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($number_product);
+                    $stmt->fetch();
+                    ?>
+                    <h3><?php echo $number_product; ?></h3>
                     <p>Products</p>
                 </div>
             </div>
@@ -147,47 +164,74 @@
                                 <th></th>
                                 <th></th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>A Madness of Sunshine</td>
-                                <td>Nalini singh</td>
-                                <td>International</td>
-                                <td>/assets/img/internationalbook/work-1.jpg</td>
-                                <td>15</td>
-                                <th><button class="btn btn-info" data-toggle="collapse" data-target="#comment1" aria-expanded="false" aria-controls="comment1">View comment</button></th>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#productEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteProduct(id)">Delete</button></td>
-                            </tr>
-                            <!---Comment-->
-                            <tr>
-                                <th colspan="9">
-                                    <div class="card collapse" id="comment1">
-                                        <div class="card-header">
-                                            <h3 id="titleTable">
-                                                Comment
-                                            </h3>
+                            <?php
+                            $sql = "SELECT * FROM product";
+                            $stmt = $mysqli->prepare($sql);
+                            $stmt->execute();
+                            $stmt->store_result();
+                            $stmt->bind_result($product_id, $name, $author, $type, $url, $price);
+                            $product = array();
+                            while ($stmt->fetch()) {
+                                array_push($product, array($product_id, $name, $author, $type, $url, $price))
+                            ?>
+                                <tr>
+                                    <td><?php echo $product_id; ?></td>
+                                    <td><?php echo $name; ?></td>
+                                    <td><?php echo $author; ?></td>
+                                    <td><?php echo $type; ?></td>
+                                    <td><?php echo $url; ?></td>
+                                    <td><?php echo $price; ?></td>
+                                    <th><button class="btn btn-info" data-toggle="collapse" data-target="#comment<?php echo $product_id; ?>" aria-expanded="false" aria-controls="comment<?php echo $product_id; ?>">View comment</button></th>
+                                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#productEditModal<?php echo $product_id; ?>">Edit</button></td>
+                                    <td><button class="btn btn-danger" onclick="deleteProduct(<?php echo $product_id; ?>)">Delete</button></td>
+                                </tr>
+                                <!---Comment-->
+                                <?php
+                                $sql1 = "SELECT id, username, time, detail FROM comment WHERE product_id = ?";
+                                $stmt1 = $mysqli->prepare($sql1);
+                                $stmt1->bind_param("i", $product_id);
+                                $stmt1->execute();
+                                $stmt1->store_result();
+                                $stmt1->bind_result($comment_id, $username, $time, $detail);
+                                ?>
+                                <tr>
+                                    <th colspan="9">
+                                        <div class="card collapse" id="comment<?php echo $product_id; ?>">
+                                            <div class="card-header">
+                                                <h3 id="titleTable">
+                                                    Comment
+                                                </h3>
+                                            </div>
+                                            <div class="card-content">
+                                                <table class="table-stripped">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Username</th>
+                                                        <th>Time</th>
+                                                        <th>Detail</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    <?php
+                                                    while ($stmt1->fetch()) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?php echo $comment_id; ?></td>
+                                                            <td><?php echo $username; ?></td>
+                                                            <td><?php echo $time; ?></td>
+                                                            <td><?php echo $detail; ?></td>
+                                                            <td><button class="btn btn-danger" onclick="deleteComment(<?php echo $comment_id; ?>)">Delete</button></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="card-content">
-                                            <table class="table-stripped">
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Username</th>
-                                                    <th>Time</th>
-                                                    <th>Detail</th>
-                                                    <th></th>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>tri.hobknetid</td>
-                                                    <td>2020-12-29</td>
-                                                    <td>Như cc</td>
-                                                    <td><button class="btn btn-danger" onclick="deleteComment(id)">Delete</button></td>
-                                                </tr>>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </th>
-                            </tr>
+                                    </th>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </table>
                         <div class="col d-flex justify-content-end">
                             <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#productModal">Add new product</button>
@@ -198,7 +242,7 @@
         </div>
     </div>
 
-    <!-- Modal add user-->
+    <!-- Modal add products-->
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -248,7 +292,7 @@
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="price" class="col-2 col-form-label"><strong>Price</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="number" min="0" step="0.01" value="" id="price">
+                                <input class="form-control" type="number" min="0" step="1" value="" id="price">
                             </div>
                             <span class="text-danger" id="priceErr"></span>
                         </div>
@@ -261,70 +305,75 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal add user-->
-    <div class="modal fade" id="productEditModal" tabindex="-1" role="dialog" aria-labelledby="productEditModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Edit product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="id-edit">
+    <?php
+    for ($index = 0; $index < count($product); $index++) {
+    ?>
+        <!-- Modal edit products-->
+        <div class="modal fade" id="productEditModal<?php echo $product[$index][0]; ?>" tabindex="-1" role="dialog" aria-labelledby="productEditModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Edit product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row align-items-center">
+                                <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][0]; ?>" id="id-edit">
+                                </div>
+                                <span class="text-danger" id="idErr"></span>
                             </div>
-                            <span class="text-danger" id="idErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="name-edit" class="col-2 col-form-label"><strong>Name</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="name-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="name-edit" class="col-2 col-form-label"><strong>Name</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][1]; ?>" id="name-edit">
+                                </div>
+                                <span class="text-danger" id="nameErr"></span>
                             </div>
-                            <span class="text-danger" id="nameErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="author-edit" class="col-2 col-form-label"><strong>Author</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="author-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="author-edit" class="col-2 col-form-label"><strong>Author</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][2]; ?>" id="author-edit">
+                                </div>
+                                <span class="text-danger" id="authorErr"></span>
                             </div>
-                            <span class="text-danger" id="authorErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="type-edit" class="col-2 col-form-label"><strong>Type</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="type-edit">
+                            <div class="form-group row align-items-center">
+                                <label for="type-edit" class="col-2 col-form-label"><strong>Type</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][3]; ?>" id="type-edit">
+                                </div>
+                                <span class="text-danger" id="typeErr"></span>
                             </div>
-                            <span class="text-danger" id="typeErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="url-edit" class="col-2 col-form-label"><strong>URL</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="url-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="url-edit" class="col-2 col-form-label"><strong>URL</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][4]; ?>" id="url-edit">
+                                </div>
+                                <span class="text-danger" id="urlErr"></span>
                             </div>
-                            <span class="text-danger" id="urlErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="price-edit" class="col-2 col-form-label"><strong>Price</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="number" min="0" step="0.01" value="" id="price-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="price-edit" class="col-2 col-form-label"><strong>Price</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="number" min="0" step="0.01" value="<?php echo $product[$index][5]; ?>" id="price-edit">
+                                </div>
+                                <span class="text-danger" id="priceErr"></span>
                             </div>
-                            <span class="text-danger" id="priceErr"></span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="editProduct(oldId)">Add</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="editProduct(<?php echo $product[$index][0]; ?>)">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
     <!-- end main content -->
     <!-- import script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
