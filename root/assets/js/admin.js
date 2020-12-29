@@ -167,7 +167,7 @@ function changeInfo() {
     )
 }
 
-function checkEnter(e){
+function checkEnter(e) {
     if (e.keyCode === 13) {
         //Search for products here
         login();
@@ -229,7 +229,7 @@ function editUser() {
     var date_of_birth = document.getElementById("birthday-edit").value;
     $.post(
         "action.php",
-        { action: "edit_user", id: id, username:username, email: email, fullname:full_name,url: url, telephone: telephone, date_of_birth: date_of_birth },
+        { action: "edit_user", id: id, username: username, email: email, fullname: full_name, url: url, telephone: telephone, date_of_birth: date_of_birth },
         function (data, status) {
             alert(data);
             if (data == "Change user information successfully!") window.location.href = "user.php";
@@ -248,15 +248,58 @@ function editStaff() {
     var php = document.getElementById("php-edit").value;
     var javascript = document.getElementById("javascript-edit").value;
     var detail = document.getElementById("detail-edit").value;
-   
+
     $.post(
         "action.php",
-        { action: "edit_staff", 
-        id: id, name:name,profile:profile, email: email, phone:phone,
-        html:html, css:css, php: php,javascript:javascript,detail:detail},
+        {
+            action: "edit_staff",
+            id: id, name: name, profile: profile, email: email, phone: phone,
+            html: html, css: css, php: php, javascript: javascript, detail: detail
+        },
         function (data, status) {
             alert(data);
             if (data == "Change staff information successfully!") window.location.href = "staff.php";
         }
     );
+}
+
+function addProduct() {
+
+    if (validate("id") && validate("name") && validate('author') && validate('type') && validate('url') && validate('price')) {
+        var idValue = document.getElementById("id").value;
+        var nameValue = document.getElementById("name").value;
+        var authorValue = document.getElementById("author").value;
+        var typeValue = document.getElementById("type").value;
+        var urlValue = document.getElementById("url").value;
+        var priceValue = document.getElementById("price").value;
+
+        $.post(
+            "action.php",
+            {
+                action: "add_product",
+                id: idValue,
+                name: nameValue,
+                author: authorValue,
+                type: typeValue,
+                url: urlValue,
+                price: priceValue
+            },
+            function (data, status) {
+                alert(data);
+                if (data == "Add product successfully!")
+                    window.location.href = "product.php";
+            }
+        )
+    }
+}
+
+function validate(name) {
+    if (!document.getElementById(name).checkValidity()) {
+        document.getElementById(name + "Err").innerHTML = document.getElementById("name").validationMessage;
+        return false;
+    }
+    else {
+        document.getElementById(name + "Err").innerHTML = document.getElementById("name").validationMessage;
+        return true;
+    }
 }

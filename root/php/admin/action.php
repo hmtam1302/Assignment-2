@@ -77,7 +77,7 @@ if ($action == "edit_product") {
     $price = $_POST['price'];
 
     //Check if new id exist
-    if (checkProductId($mysqli, $old_id, $new_id)) {
+    if (checkProduct($mysqli, $old_id, $new_id)) {
         echo "New ID existed, please choose another one!";
     } else {
         echo changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $price);
@@ -86,6 +86,68 @@ if ($action == "edit_product") {
 if ($action == "delete_product") {
     $id = $_POST['id'];
     echo deleteProduct($mysqli, $id);
+}
+
+if ($action == "add_product") {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $author = $_POST['author'];
+    $type = $_POST['type'];
+    $url = $_POST['url'];
+    $price = $_POST['price'];
+
+    if (checkProductId($mysqli, $id)) {
+        echo "New ID existed, please choose another one!";
+    } else {
+        echo addProduct($mysqli, $id, $name, $author, $type, $url, $price);
+    }
+}
+
+function addProduct($mysqli, $id, $name, $author, $type, $url, $price)
+{
+    $param_id = $param_name = $param_author = $param_url = $param_type = $param_price = NULL;
+    $sql = "INSERT INTO product(id, name, author, type, url, price) VALUES (?, ?, ?, ?, ?, ?)";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param(
+            'issssi',
+            $param_id,
+            $param_name,
+            $param_author,
+            $param_type,
+            $param_url,
+            $param_price
+        );
+
+        $param_id = $id;
+        $param_name = $name;
+        $param_author = $author;
+        $param_url = $url;
+        $param_type  = $type;
+        $param_price = $price;
+        if ($stmt->execute()) {
+            return "Add product successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+}
+
+function checkProductId($mysqli, $id)
+{
+    $param_id = NULL;
+    $sql = "SELECT id FROM product WHERE id = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('i', $param_id);
+    $param_id = $id;
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows >= 1) {
+        return true;
+    }
+    return false;
 }
 
 function deleteProduct($mysqli, $id)
@@ -154,7 +216,7 @@ function changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $
     }
 }
 
-function checkProductId($mysqli, $old_id, $new_id)
+function checkProduct($mysqli, $old_id, $new_id)
 {
     $param_id = NULL;
     if ($old_id == $new_id) return false;

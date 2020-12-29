@@ -253,48 +253,41 @@ if (!isset($_SESSION['admin'])) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="id" class="col-2 col-form-label"><strong>ID</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="id">
-                            </div>
-                            <span class="text-danger" id="idErr"></span>
-                        </div>
+                    <form id="add-product-form">
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="name" class="col-2 col-form-label"><strong>Name</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="name">
+                                <input class="form-control" type="text" value="" id="name" required>
+                                <span class="text-danger" id="nameErr"></span>
                             </div>
-                            <span class="text-danger" id="nameErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="author" class="col-2 col-form-label"><strong>Author</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="author">
+                                <input class="form-control" type="text" value="" id="author" required>
+                                <span class="text-danger" id="authorErr"></span>
                             </div>
-                            <span class="text-danger" id="authorErr"></span>
                         </div>
                         <div class="form-group row align-items-center">
                             <label for="type" class="col-2 col-form-label"><strong>Type</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="type">
+                                <input class="form-control" type="text" value="" id="type" required>
+                                <span class="text-danger" id="typeErr"></span>
                             </div>
-                            <span class="text-danger" id="typeErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="url" class="col-2 col-form-label"><strong>URL</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="" id="url">
+                                <input class="form-control" type="text" value="" id="url" required>
+                                <span class="text-danger" id="urlErr"></span>
                             </div>
-                            <span class="text-danger" id="urlErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="price" class="col-2 col-form-label"><strong>Price</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="number" min="0" step="1" value="" id="price">
+                                <input class="form-control" type="number" min="0" step="1" value="" id="price" required>
+                                <span class="text-danger" id="priceErr"></span>
                             </div>
-                            <span class="text-danger" id="priceErr"></span>
                         </div>
                     </form>
                 </div>
