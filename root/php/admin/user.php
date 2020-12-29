@@ -276,14 +276,14 @@
                         <div class="form-group row align-items-center">
                             <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="OK" id="id-edit">
+                                <input class="form-control" type="text" value="" id="id-edit">
                             </div>
                             <span class="text-danger" id="idErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="username-edit" class="col-2 col-form-label"><strong>Username</strong></label>
                             <div class="col-10">
-                                <input class="form-control" type="text" value="huynhhai" id="username-edit">
+                                <input class="form-control" type="text" value="" id="username-edit">
                             </div>
                             <span class="text-danger" id="usernameErr"></span>
                         </div>
@@ -326,7 +326,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="editUser(oldId)">Add</button>
+                    <button type="button" class="btn btn-primary" onclick="editUser()">Edit</button>
                 </div>
             </div>
         </div>

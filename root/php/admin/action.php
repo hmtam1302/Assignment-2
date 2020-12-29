@@ -37,6 +37,17 @@ if ($action == "change_info") {
 
     echo changeInfo($mysqli, $address, $phone, $email, $detail);
 }
+if ($action =="edit_user")
+{
+    $id = $_POST['id']; 
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $full_name = $_POST['fullname'];
+    $url = $_POST['url'];
+    $telephone = $_POST['telephone'];
+    $date_of_birth = $_POST['date_of_birth'];
+    echo editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_of_birth);
+}
 /*if ($action =="delete_user")
 {
     $id =$_POST['id'];
@@ -291,6 +302,39 @@ function changeInfo($mysqli, $address, $phone, $email, $detail)
     } else {
         return "SQL prepared incorrectly!";
     }
+}
+function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_of_birth)
+{
+    $sql = "UPDATE users SET username=?,email=?, 
+    full_name=?,url=?,telephone=?,date_of_birth=? where id=?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('sssssdi', 
+        $param_username,
+        $param_email, 
+        $param_fullname,
+        $param_url,
+        $param_telephone,
+        $param_birthday,
+        $param_id
+        );
+
+        $param_username = $username;
+        $param_email = $email;
+        $param_fullname = $full_name;
+        $param_url = $url;
+        $param_telephone  = $telephone;
+        $param_birthday = $date_of_birth;
+        $param_id=$id;
+        if ($stmt->execute()) {
+            return "Change profile successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+
 }
 /*function deleteUser($mysqli,$id)
 {

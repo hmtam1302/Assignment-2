@@ -144,14 +144,34 @@
                                 <th>Message</th>
                                 <th>Creat at</th>
                             </tr>
+                            <?php
+                            require_once "config.php";
+
+              
+                        //Display all categories
+                            $sql = "SELECT * FROM contact WHERE 1";
+
+                            if ($stmt = $mysqli->prepare($sql)) {
+                                if ($stmt->execute()) {
+                                    $stmt->store_result();
+
+                                    $stmt->bind_result($id, $name, $email, $subject, $message, $created_at);
+                                while ($stmt->fetch()) {
+                            ?>
                             <tr>
-                                <td>1</td>
-                                <td>A Madness of Sunshine</td>
-                                <td>Nalini singh</td>
-                                <td>International</td>
-                                <td>/assets/img/internationalbook/work-1.jpg</td>
-                                <td>15</td>
+                                <td><?php echo $id?></td>
+                                <td><?php echo $name?></td>
+                                <td><?php echo $email?></td>
+                                <td><?php echo $subject ?></td>
+                                <td><?php echo $message ?></td>
+                                <td><?php echo $created_at ?></td>
+                                
                             </tr>
+                            <?php
+                                }
+                            }
+                        } 
+                            ?>
                         </table>
 
                     </div>

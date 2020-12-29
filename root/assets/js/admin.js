@@ -218,3 +218,21 @@ function deleteProduct(product_id) {
         );
     }
 }
+// edit user name in user.php
+function editUser() {
+    var id = document.getElementById("id-edit").value;
+    var username = document.getElementById("username-edit").value;
+    var email = document.getElementById("email-edit").value;
+    var full_name = document.getElementById("full-name-edit").value;
+    var url = document.getElementById("url-edit").value;
+    var telephone = document.getElementById("telephone-edit").value;
+    var date_of_birth = document.getElementById("birthday-edit").value;
+    $.post(
+        "action.php",
+        { action: "edit_user", id: id, username:username, email: email, fullname:full_name,url: url, telephone: telephone, date_of_birth: date_of_birth },
+        function (data, status) {
+            alert(data);
+            if (data == "Change user information successfully!") window.location.href = "dashboard.php";
+        }
+    );
+}
