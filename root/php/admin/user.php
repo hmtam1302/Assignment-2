@@ -139,7 +139,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>User name</th>
-                                <th>Password</th>
+                                
                                 <th>Email</th>
                                 <th>Full name</th>
                                 <th>URL</th>
@@ -148,42 +148,38 @@
                                 <th></th>
                                 <th></th>
                             </tr>
+                            <?php
+                            require_once "config.php";
+
+                        
+                        //Display all categories
+                            $sql = "SELECT * FROM users WHERE 1";
+
+                            if ($stmt = $mysqli->prepare($sql)) {
+                                if ($stmt->execute()) {
+                                    $stmt->store_result();
+
+                                    $stmt->bind_result($id, $username, $password, 
+                                    $email,$full_name, $url, $telephone,$date_of_birth,$created_at);
+                                while ($stmt->fetch()) {
+                                ?>
                             <tr>
-                                <td>1</td>
-                                <td>huynhhai</td>
-                                <td>123456</td>
-                                <td>conghai20@gmail.com</td>
-                                <td>Huỳnh Công Hải</td>
-                                <td>fb.com/haryo.hh</td>
-                                <td>0942239400</td>
-                                <td>2000-01-21</td>
+                                <td><?php echo $id?></td>
+                                <td><?php echo $username?></td>
+                                
+                                <td><?php echo $email?></td>
+                                <td><?php echo $full_name?></td>
+                                <td><?php echo $url?></td>
+                                <td><?php echo $telephone?></td>
+                                <td><?php echo $date_of_birth?></td>
                                 <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
                                 <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>huynhhai</td>
-                                <td>123456</td>
-                                <td>conghai20@gmail.com</td>
-                                <td>Huỳnh Công Hải</td>
-                                <td>fb.com/haryo.hh</td>
-                                <td>0942239400</td>
-                                <td>2000-01-21</td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>huynhhai</td>
-                                <td>123456</td>
-                                <td>conghai20@gmail.com</td>
-                                <td>Huỳnh Công Hải</td>
-                                <td>fb.com/haryo.hh</td>
-                                <td>0942239400</td>
-                                <td>2000-01-21</td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteUser(1)">Delete</button></td>
-                            </tr>
+                            <?php
+                                }
+                                }
+                            }
+                            ?>
                         </table>
                         <div class="col d-flex justify-content-end">
                             <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#userModal">Add new user</button>

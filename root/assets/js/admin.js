@@ -173,3 +173,14 @@ function checkEnter(e){
         login();
     }
 }
+/*function deleteUser(){
+    var id = document.getElementById('id').value;
+    $.post(
+        "action.php",
+        { action: "delete_user", id: addressValue},
+        function (data, status) {
+            alert(data);
+            if (data == "Delete User successful!!!") window.location.href = "dashboard.php";
+        }
+    )
+}*/

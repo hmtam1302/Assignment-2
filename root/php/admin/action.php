@@ -37,6 +37,12 @@ if ($action == "change_info") {
 
     echo changeInfo($mysqli, $address, $phone, $email, $detail);
 }
+/*if ($action =="delete_user")
+{
+    $id =$_POST['id'];
+    echo deleteUser($mysqli,$id);
+}*/
+
 
 function login($mysqli, $sql, $username, $password)
 {
@@ -183,3 +189,15 @@ function changeInfo($mysqli, $address, $phone, $email, $detail)
         return "SQL prepared incorrectly!";
     }
 }
+/*function deleteUser($mysqli,$id)
+{
+    $sql = "DELETE FROM user WHERE id=1";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully";
+    } else {
+    echo "Error deleting record: " . $conn->error;
+    }
+*/
+   
+
