@@ -59,9 +59,9 @@ if ($action=="edit_staff")
     $php=$_POST['php'];
     $javascript=$_POST['javascript'];
     $detail=$_POST['detail'];
-    $url=$_POST['url'];
+    
     $id=$_POST['id'];
-    echo editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail,$url);
+    echo editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail);
 }
 /*if ($action =="delete_user")
 {
@@ -351,13 +351,13 @@ function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_
     }
 
 }
-function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail,$url)
+function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail)
 {
     $sql = "UPDATE staff SET name=?,profile=?, 
-    email=?,phone=?,html=?,css=?,php=?,javascript=?,detail=?,url=? where id=?";
+    email=?,phone=?,html=?,css=?,php=?,javascript=?,detail=? where id=?";
 
     if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param('ssssiiiissi', 
+        $stmt->bind_param('ssssiiiisi', 
         $param_name,
         $param_profile,
         $param_email, 
@@ -367,7 +367,7 @@ function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$jav
         $param_php,
         $param_javascript,
         $param_detail,
-        $param_url,
+       
         $param_id
         );
 
@@ -380,7 +380,7 @@ function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$jav
         $param_php=$php;
         $param_javascript=$javascript;
         $param_detail=$detail;
-        $param_url=$url;
+      
         $param_id=$id;
         if ($stmt->execute()) {
             return "Change staff information successfully!";

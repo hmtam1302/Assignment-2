@@ -259,6 +259,7 @@
                             </div>
                             <span class="text-danger" id="cssErr"></span>
                         </div>
+                        
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="php" class="col-2 col-form-label"><strong>PHP</strong></label>
                             <div class="col-10">
@@ -348,6 +349,13 @@
                             <label for="php-edit" class="col-2 col-form-label"><strong>PHP</strong></label>
                             <div class="col-10">
                                 <input class="form-control" type="number" min="0" max="100" value="" id="php-edit">
+                            </div>
+                            <span class="text-danger" id="phpErr"></span>
+                        </div>
+                        <div class="form-group row align-items-center justify-content-center">
+                            <label for="javascript-edit" class="col-2 col-form-label"><strong>Javascript</strong></label>
+                            <div class="col-10">
+                                <input class="form-control" type="number" min="0" max="100" value="" id="javascript-edit">
                             </div>
                             <span class="text-danger" id="phpErr"></span>
                         </div>
