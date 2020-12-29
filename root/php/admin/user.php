@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "config.php";
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,7 +128,15 @@
                     <p>
                         <i class="fas fa-user-alt"></i>
                     </p>
-                    <h3>100</h3>
+                    <?php
+                    $sql = "SELECT COUNT(id) FROM users";
+                    $stmt = $mysqli->prepare($sql);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($number_user);
+                    $stmt->fetch();
+                    ?>
+                    <h3><?php echo $number_user; ?></h3>
                     <p>Users</p>
                 </div>
             </div>
@@ -139,7 +154,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>User name</th>
-                                
+
                                 <th>Email</th>
                                 <th>Full name</th>
                                 <th>URL</th>
@@ -151,32 +166,41 @@
                             <?php
                             require_once "config.php";
 
-                        
-                        //Display all categories
+
+                            //Display all categories
                             $sql = "SELECT * FROM users WHERE 1";
 
                             if ($stmt = $mysqli->prepare($sql)) {
                                 if ($stmt->execute()) {
                                     $stmt->store_result();
 
-                                    $stmt->bind_result($id, $username, $password, 
-                                    $email,$full_name, $url, $telephone,$date_of_birth,$created_at);
-                                while ($stmt->fetch()) {
-                                ?>
-                            <tr>
-                                <td><?php echo $id?></td>
-                                <td><?php echo $username?></td>
-                                
-                                <td><?php echo $email?></td>
-                                <td><?php echo $full_name?></td>
-                                <td><?php echo $url?></td>
-                                <td><?php echo $telephone?></td>
-                                <td><?php echo $date_of_birth?></td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
-                            </tr>
+                                    $stmt->bind_result(
+                                        $id,
+                                        $username,
+                                        $password,
+                                        $email,
+                                        $full_name,
+                                        $url,
+                                        $telephone,
+                                        $date_of_birth,
+                                        $created_at
+                                    );
+                                    while ($stmt->fetch()) {
+                            ?>
+                                        <tr>
+                                            <td><?php echo $id ?></td>
+                                            <td><?php echo $username ?></td>
+
+                                            <td><?php echo $email ?></td>
+                                            <td><?php echo $full_name ?></td>
+                                            <td><?php echo $url ?></td>
+                                            <td><?php echo $telephone ?></td>
+                                            <td><?php echo $date_of_birth ?></td>
+                                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
+                                            <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
+                                        </tr>
                             <?php
-                                }
+                                    }
                                 }
                             }
                             ?>

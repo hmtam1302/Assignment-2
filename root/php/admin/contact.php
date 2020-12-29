@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,8 +153,8 @@
                             <?php
                             require_once "config.php";
 
-              
-                        //Display all categories
+
+                            //Display all categories
                             $sql = "SELECT * FROM contact WHERE 1";
 
                             if ($stmt = $mysqli->prepare($sql)) {
@@ -156,21 +162,21 @@
                                     $stmt->store_result();
 
                                     $stmt->bind_result($id, $name, $email, $subject, $message, $created_at);
-                                while ($stmt->fetch()) {
+                                    while ($stmt->fetch()) {
                             ?>
-                            <tr>
-                                <td><?php echo $id?></td>
-                                <td><?php echo $name?></td>
-                                <td><?php echo $email?></td>
-                                <td><?php echo $subject ?></td>
-                                <td><?php echo $message ?></td>
-                                <td><?php echo $created_at ?></td>
-                                
-                            </tr>
+                                        <tr>
+                                            <td><?php echo $id ?></td>
+                                            <td><?php echo $name ?></td>
+                                            <td><?php echo $email ?></td>
+                                            <td><?php echo $subject ?></td>
+                                            <td><?php echo $message ?></td>
+                                            <td><?php echo $created_at ?></td>
+
+                                        </tr>
                             <?php
+                                    }
                                 }
                             }
-                        } 
                             ?>
                         </table>
 
