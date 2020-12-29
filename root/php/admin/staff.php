@@ -180,7 +180,7 @@
                                 <td><?php echo $javascript?></td>
                                 <td><?php echo $detail?></td>
                                 <td><button class="btn btn-primary" data-toggle="modal" data-target="#staffEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteStaff(id)">Delete</button></td>
+                                <td><button class="btn btn-danger" onclick="deleteStaff(<?php echo $id ?>)">Delete</button></td>
                             </tr>
                             <?php
                                 }
