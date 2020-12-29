@@ -37,31 +37,29 @@ if ($action == "change_info") {
 
     echo changeInfo($mysqli, $address, $phone, $email, $detail);
 }
-if ($action =="edit_user")
-{
-    $id = $_POST['id']; 
+if ($action == "edit_user") {
+    $id = $_POST['id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
     $full_name = $_POST['fullname'];
     $url = $_POST['url'];
     $telephone = $_POST['telephone'];
     $date_of_birth = $_POST['date_of_birth'];
-    echo editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_of_birth);
+    echo editUser($mysqli, $id, $username, $email, $full_name, $url, $telephone, $date_of_birth);
 }
-if ($action=="edit_staff")
-{
-    $name=$_POST['name'];
-    $profile=$_POST['profile'];
-    $email=$_POST['email'];
-    $phone=$_POST['phone'];
-    $html=$_POST['html'];
-    $css=$_POST['css'];
-    $php=$_POST['php'];
-    $javascript=$_POST['javascript'];
-    $detail=$_POST['detail'];
-    
-    $id=$_POST['id'];
-    echo editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail);
+if ($action == "edit_staff") {
+    $name = $_POST['name'];
+    $profile = $_POST['profile'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $html = $_POST['html'];
+    $css = $_POST['css'];
+    $php = $_POST['php'];
+    $javascript = $_POST['javascript'];
+    $detail = $_POST['detail'];
+
+    $id = $_POST['id'];
+    echo editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $detail);
 }
 /*if ($action =="delete_user")
 {
@@ -318,20 +316,22 @@ function changeInfo($mysqli, $address, $phone, $email, $detail)
         return "SQL prepared incorrectly!";
     }
 }
-function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_of_birth)
+
+function editUser($mysqli, $id, $username, $email, $full_name, $url, $telephone, $date_of_birth)
 {
-    $sql = "UPDATE users SET username=?,email=?, 
-    full_name=?,url=?,telephone=?,date_of_birth=? where id=?";
+    $param_username = $param_email = $param_fullname = $param_url = $param_telephone = $param_birthday = $param_id = NULL;
+    $sql = "UPDATE users SET username=?,email=?, full_name=?,url=?,telephone=?,date_of_birth=? WHERE id=?";
 
     if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param('sssssdi', 
-        $param_username,
-        $param_email, 
-        $param_fullname,
-        $param_url,
-        $param_telephone,
-        $param_birthday,
-        $param_id
+        $stmt->bind_param(
+            'sssssdi',
+            $param_username,
+            $param_email,
+            $param_fullname,
+            $param_url,
+            $param_telephone,
+            $param_birthday,
+            $param_id
         );
 
         $param_username = $username;
@@ -340,7 +340,7 @@ function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_
         $param_url = $url;
         $param_telephone  = $telephone;
         $param_birthday = $date_of_birth;
-        $param_id=$id;
+        $param_id = $id;
         if ($stmt->execute()) {
             return "Change user information successfully!";
         } else {
@@ -349,39 +349,39 @@ function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_
     } else {
         return "SQL prepared incorrectly!";
     }
-
 }
-function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail)
+function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $detail)
 {
-    $sql = "UPDATE staff SET name=?,profile=?, 
-    email=?,phone=?,html=?,css=?,php=?,javascript=?,detail=? where id=?";
+    $param_name = $param_profile = $param_email = $param_phone = $param_html = $param_css = $param_php = $param_javascript = $param_detail = $param_id = NULL;
+    $sql = "UPDATE staff SET name=?,profile=?, email=?,phone=?,html=?,css=?,php=?,javascript=?,detail=? where id=?";
 
     if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param('ssssiiiisi', 
-        $param_name,
-        $param_profile,
-        $param_email, 
-        $param_phone,
-        $param_html,
-        $param_css,
-        $param_php,
-        $param_javascript,
-        $param_detail,
-       
-        $param_id
+        $stmt->bind_param(
+            'ssssiiiisi',
+            $param_name,
+            $param_profile,
+            $param_email,
+            $param_phone,
+            $param_html,
+            $param_css,
+            $param_php,
+            $param_javascript,
+            $param_detail,
+
+            $param_id
         );
 
         $param_username = $name;
-        $param_profile=$profile;
+        $param_profile = $profile;
         $param_email = $email;
-        $param_phone=$phone;
-        $param_html=$html;
-        $param_css=$css;
-        $param_php=$php;
-        $param_javascript=$javascript;
-        $param_detail=$detail;
-      
-        $param_id=$id;
+        $param_phone = $phone;
+        $param_html = $html;
+        $param_css = $css;
+        $param_php = $php;
+        $param_javascript = $javascript;
+        $param_detail = $detail;
+
+        $param_id = $id;
         if ($stmt->execute()) {
             return "Change staff information successfully!";
         } else {
@@ -390,7 +390,6 @@ function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$jav
     } else {
         return "SQL prepared incorrectly!";
     }
-
 }
 /*function deleteUser($mysqli,$id)
 {
