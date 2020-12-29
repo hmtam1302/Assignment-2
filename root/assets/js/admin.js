@@ -186,12 +186,12 @@ function checkEnter(e) {
 }*/
 
 function editProduct(product_id_value) {
-    var idValue = document.getElementById('id-edit').value;
-    var nameValue = document.getElementById('name-edit').value;
-    var authorValue = document.getElementById('author-edit').value;
-    var typeValue = document.getElementById('type-edit').value;
-    var urlValue = document.getElementById('url-edit').value;
-    var priceValue = document.getElementById('price-edit').value;
+    var idValue = document.getElementById('id-edit-' + product_id_value).value;
+    var nameValue = document.getElementById('name-edit-' + product_id_value).value;
+    var authorValue = document.getElementById('author-edit-' + product_id_value).value;
+    var typeValue = document.getElementById('type-edit-' + product_id_value).value;
+    var urlValue = document.getElementById('url-edit-' + product_id_value).value;
+    var priceValue = document.getElementById('price-edit-' + product_id_value).value;
 
     $.post(
         "action.php",

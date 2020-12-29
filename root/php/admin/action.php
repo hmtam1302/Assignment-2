@@ -77,9 +77,10 @@ if ($action == "edit_product") {
     $price = $_POST['price'];
 
     //Check if new id exist
-    if (checkProduct($mysqli, $old_id, $new_id)) {
+    if (!checkProduct($mysqli, $old_id, $new_id)) {
         echo "New ID existed, please choose another one!";
     } else {
+        changeCommentWithProductId($mysqli, $old_id, $new_id);
         echo changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $price);
     }
 }
@@ -101,6 +102,17 @@ if ($action == "add_product") {
     } else {
         echo addProduct($mysqli, $id, $name, $author, $type, $url, $price);
     }
+}
+
+function changeCommentWithProductId($mysqli, $old_id, $new_id)
+{
+    $param_new_id = $param_old_id = NULL;
+    $sql = "UPDATE comment SET product_id = ? WHERE product_id = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('ii', $param_new_id, $param_old_id);
+    $param_new_id = $new_id;
+    $param_old_id = $old_id;
+    $stmt->execute();
 }
 
 function addProduct($mysqli, $id, $name, $author, $type, $url, $price)
@@ -194,7 +206,6 @@ function changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $
 {
     $param_id = $param_name = $param_author = $param_type  = $param_url = $param_price = $id = NULL;
     $sql = "UPDATE product SET id=?, name=?,author=?, type=?, url=?, price=? WHERE id = ?";
-
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param('issssii', $param_id, $param_name, $param_author, $param_type, $param_url, $param_price, $id);
 
@@ -205,7 +216,6 @@ function changeProduct($mysqli, $old_id, $new_id, $name, $author, $type, $url, $
         $param_url = $url;
         $param_price = $price;
         $id = $old_id;
-
         if ($stmt->execute()) {
             return "Change product information successfully!";
         } else {
@@ -226,10 +236,10 @@ function checkProduct($mysqli, $old_id, $new_id)
     $param_id = $new_id;
     $stmt->execute();
     $stmt->store_result();
-    if ($stmt->num_rows >= 1) {
-        return true;
+    if ($stmt->num_rows == 1) {
+        return false;
     }
-    return false;
+    return true;
 }
 
 

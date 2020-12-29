@@ -314,44 +314,44 @@ if (!isset($_SESSION['admin'])) {
                     <div class="modal-body">
                         <form>
                             <div class="form-group row align-items-center">
-                                <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
+                                <label for="id-edit-<?php echo $product[$index][0]; ?>" class="col-2 col-form-label"><strong>ID</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" value="<?php echo $product[$index][0]; ?>" id="id-edit">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][0]; ?>" id="id-edit-<?php echo $product[$index][0]; ?>">
                                 </div>
                                 <span class="text-danger" id="idErr"></span>
                             </div>
                             <div class="form-group row align-items-center justify-content-center">
-                                <label for="name-edit" class="col-2 col-form-label"><strong>Name</strong></label>
+                                <label for="name-edit-<?php echo $product[$index][0]; ?>" class="col-2 col-form-label"><strong>Name</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" value="<?php echo $product[$index][1]; ?>" id="name-edit">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][1]; ?>" id="name-edit-<?php echo $product[$index][0]; ?>">
                                 </div>
                                 <span class="text-danger" id="nameErr"></span>
                             </div>
                             <div class="form-group row align-items-center justify-content-center">
-                                <label for="author-edit" class="col-2 col-form-label"><strong>Author</strong></label>
+                                <label for="author-edit-<?php echo $product[$index][0]; ?>" class="col-2 col-form-label"><strong>Author</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" value="<?php echo $product[$index][2]; ?>" id="author-edit">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][2]; ?>" id="author-edit-<?php echo $product[$index][0]; ?>">
                                 </div>
                                 <span class="text-danger" id="authorErr"></span>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label for="type-edit" class="col-2 col-form-label"><strong>Type</strong></label>
+                                <label for="type-edit-<?php echo $product[$index][0]; ?>" class="col-2 col-form-label"><strong>Type</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" value="<?php echo $product[$index][3]; ?>" id="type-edit">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][3]; ?>" id="type-edit-<?php echo $product[$index][0]; ?>">
                                 </div>
                                 <span class="text-danger" id="typeErr"></span>
                             </div>
                             <div class="form-group row align-items-center justify-content-center">
-                                <label for="url-edit" class="col-2 col-form-label"><strong>URL</strong></label>
+                                <label for="url-edit-<?php echo $product[$index][0]; ?>" class="col-2 col-form-label"><strong>URL</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" value="<?php echo $product[$index][4]; ?>" id="url-edit">
+                                    <input class="form-control" type="text" value="<?php echo $product[$index][4]; ?>" id="url-edit-<?php echo $product[$index][0]; ?>">
                                 </div>
                                 <span class="text-danger" id="urlErr"></span>
                             </div>
                             <div class="form-group row align-items-center justify-content-center">
-                                <label for="price-edit" class="col-2 col-form-label"><strong>Price</strong></label>
+                                <label for="price-edit-<?php echo $product[$index][0]; ?>" class="col-2 col-form-label"><strong>Price</strong></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="number" min="0" step="0.01" value="<?php echo $product[$index][5]; ?>" id="price-edit">
+                                    <input class="form-control" type="number" min="0" step="0.01" value="<?php echo $product[$index][5]; ?>" id="price-edit-<?php echo $product[$index][0]; ?>">
                                 </div>
                                 <span class="text-danger" id="priceErr"></span>
                             </div>
