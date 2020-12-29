@@ -48,6 +48,21 @@ if ($action =="edit_user")
     $date_of_birth = $_POST['date_of_birth'];
     echo editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_of_birth);
 }
+if ($action=="edit_staff")
+{
+    $name=$_POST['name'];
+    $profile=$_POST['profile'];
+    $email=$_POST['email'];
+    $phone=$_POST['phone'];
+    $html=$_POST['html'];
+    $css=$_POST['css'];
+    $php=$_POST['php'];
+    $javascript=$_POST['javascript'];
+    $detail=$_POST['detail'];
+    $url=$_POST['url'];
+    $id=$_POST['id'];
+    echo editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail,$url);
+}
 /*if ($action =="delete_user")
 {
     $id =$_POST['id'];
@@ -328,6 +343,47 @@ function editUser($mysqli,$id,$username,$email,$full_name,$url,$telephone,$date_
         $param_id=$id;
         if ($stmt->execute()) {
             return "Change user information successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+
+}
+function editStaff($mysqli,$id,$name,$profile,$email,$phone,$html,$css,$php,$javascript,$detail,$url)
+{
+    $sql = "UPDATE staff SET name=?,profile=?, 
+    email=?,phone=?,html=?,css=?,php=?,javascript=?,detail=?,url=? where id=?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('ssssiiiissi', 
+        $param_name,
+        $param_profile,
+        $param_email, 
+        $param_phone,
+        $param_html,
+        $param_css,
+        $param_php,
+        $param_javascript,
+        $param_detail,
+        $param_url,
+        $param_id
+        );
+
+        $param_username = $name;
+        $param_profile=$profile;
+        $param_email = $email;
+        $param_phone=$phone;
+        $param_html=$html;
+        $param_css=$css;
+        $param_php=$php;
+        $param_javascript=$javascript;
+        $param_detail=$detail;
+        $param_url=$url;
+        $param_id=$id;
+        if ($stmt->execute()) {
+            return "Change staff information successfully!";
         } else {
             return "SQL executed incorrectly!";
         }

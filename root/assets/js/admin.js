@@ -236,3 +236,27 @@ function editUser() {
         }
     );
 }
+// edit staff
+function editSteditStaffaff() {
+    var id = document.getElementById("id-edit").value;
+    var name = document.getElementById("name-edit").value;
+    var profile = document.getElementById("profile-edit").value;
+    var email = document.getElementById("email-edit").value;
+    var phone = document.getElementById("phone-edit").value;
+    var html = document.getElementById("html-edit").value;
+    var css = document.getElementById("css-edit").value;
+    var php = document.getElementById("php-edit").value;
+    var javascript = document.getElementById("javascript-edit").value;
+    var detail = document.getElementById("detail-edit").value;
+    var url = document.getElementById("url-edit").value;
+    $.post(
+        "action.php",
+        { action: "edit_staff", 
+        id: id, name:name,profile:profile, email: email, phone:phone,
+        html:html, css:css, php: php,javascript:javascript,detail:detail,url:url},
+        function (data, status) {
+            alert(data);
+            if (data == "Change staff information successfully!") window.location.href = "staff.php";
+        }
+    );
+}
