@@ -208,12 +208,11 @@ if ($action == "edit_user") {
 function editUser($mysqli, $id, $username, $email, $full_name, $url, $telephone, $date_of_birth)
 {
     $param_username = $param_email = $param_fullname = $param_url = $param_telephone = $param_birthday = $param_id = NULL;
-    $sql = "UPDATE users SET username=?,email=?, full_name=?,url=?,telephone=?,date_of_birth=? WHERE id=?";
+    $sql = "UPDATE users SET email=?, full_name=?,url=?,telephone=?,date_of_birth=? WHERE id=?";
 
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param(
-            'sssssdi',
-            $param_username,
+            'sssssi',
             $param_email,
             $param_fullname,
             $param_url,
@@ -222,7 +221,6 @@ function editUser($mysqli, $id, $username, $email, $full_name, $url, $telephone,
             $param_id
         );
 
-        $param_username = $username;
         $param_email = $email;
         $param_fullname = $full_name;
         $param_url = $url;

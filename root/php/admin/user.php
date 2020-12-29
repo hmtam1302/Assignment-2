@@ -168,6 +168,7 @@ if (!isset($_SESSION['admin'])) {
 
 
                             //Display all categories
+                            $user = array();
                             $sql = "SELECT * FROM users WHERE 1";
 
                             if ($stmt = $mysqli->prepare($sql)) {
@@ -186,6 +187,7 @@ if (!isset($_SESSION['admin'])) {
                                         $created_at
                                     );
                                     while ($stmt->fetch()) {
+                                        array_push($user, array($id, $username, $email, $full_name, $url, $telephone, $date_of_birth))
                             ?>
                                         <tr>
                                             <td><?php echo $id ?></td>
@@ -196,7 +198,7 @@ if (!isset($_SESSION['admin'])) {
                                             <td><?php echo $url ?></td>
                                             <td><?php echo $telephone ?></td>
                                             <td><?php echo $date_of_birth ?></td>
-                                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
+                                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal<?php echo $id ?>">Edit</button></td>
                                             <td><button class="btn btn-danger" onclick="deleteUser(<?php echo $id ?>)">Delete</button></td>
                                         </tr>
                             <?php
@@ -213,7 +215,6 @@ if (!isset($_SESSION['admin'])) {
             </div>
         </div>
     </div>
-
     <!-- Modal add user-->
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -285,76 +286,81 @@ if (!isset($_SESSION['admin'])) {
         </div>
     </div>
 
-    <!-- Modal edit user-->
-    <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Edit user</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="id-edit">
+    <?php for ($index = 0; $index < count($user); $index++) {
+    ?>
+        <!-- Modal edit user-->
+        <div class="modal fade" id="userEditModal<?php echo $user[$index][0]; ?>" tabindex="-1" role="dialog" aria-labelledby="userEditModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Edit user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row align-items-center">
+                                <label for="id-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>ID</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $user[$index][0]; ?>" id="id-edit-<?php echo $user[$index][0]; ?>" disabled>
+                                </div>
+                                <span class="text-danger" id="idErr"></span>
                             </div>
-                            <span class="text-danger" id="idErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="username-edit" class="col-2 col-form-label"><strong>Username</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="username-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="username-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>Username</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $user[$index][1]; ?>" id="username-edit-<?php echo $user[$index][0]; ?>" disabled>
+                                </div>
+                                <span class="text-danger" id="usernameErr"></span>
                             </div>
-                            <span class="text-danger" id="usernameErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="email-edit" class="col-2 col-form-label"><strong>Email</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="email" value="" id="email-edit">
+                            <div class="form-group row align-items-center">
+                                <label for="email-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>Email</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="email" value="<?php echo $user[$index][2]; ?>" id="email-edit-<?php echo $user[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="emailErr"></span>
                             </div>
-                            <span class="text-danger" id="emailErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="full-name-edit" class="col-2 col-form-label"><strong>Full name</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="full-name-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="full-name-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>Full name</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $user[$index][3]; ?>" id="full-name-edit-<?php echo $user[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="fullnameErr"></span>
                             </div>
-                            <span class="text-danger" id="fullnameErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="url-edit" class="col-2 col-form-label"><strong>URL</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="url" value="" id="url-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="url-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>URL</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="url" value="<?php echo $user[$index][4]; ?>" id="url-edit-<?php echo $user[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="urlErr"></span>
                             </div>
-                            <span class="text-danger" id="urlErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="telephone-edit" class="col-2 col-form-label"><strong>Telephone</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="telephone-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="telephone-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>Telephone</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $user[$index][5]; ?>" id="telephone-edit-<?php echo $user[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="telephoneErr"></span>
                             </div>
-                            <span class="text-danger" id="telephoneErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="birthday-edit" class="col-2 col-form-label"><strong>Birthday</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="url" value="" id="birthday-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="birthday-edit-<?php echo $user[$index][0]; ?>" class="col-2 col-form-label"><strong>Birthday</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="date" value="<?php echo $user[$index][6]; ?>" id="birthday-edit-<?php echo $user[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="birthdayErr"></span>
                             </div>
-                            <span class="text-danger" id="birthdayErr"></span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="editUser()">Edit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="editUser(<?php echo $user[$index][0]; ?>)">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+    } 
+    ?>
     <!-- end main content -->
     <!-- import script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
