@@ -197,7 +197,7 @@ if (!isset($_SESSION['admin'])) {
                                             <td><?php echo $telephone ?></td>
                                             <td><?php echo $date_of_birth ?></td>
                                             <td><button class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Edit</button></td>
-                                            <td><button class="btn btn-danger" onclick="deleteUser($id)">Delete</button></td>
+                                            <td><button class="btn btn-danger" onclick="deleteUser(<?php echo $id ?>)">Delete</button></td>
                                         </tr>
                             <?php
                                     }

@@ -61,12 +61,16 @@ if ($action == "edit_staff") {
     $id = $_POST['id'];
     echo editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $detail);
 }
-/*if ($action =="delete_user")
+if ($action =="delete_user")
 {
     $id =$_POST['id'];
     echo deleteUser($mysqli,$id);
-}*/
-
+}
+if ($action =="delete_staff")
+{
+    $id =$_POST['id'];
+    echo deleteStaff($mysqli,$id);
+}
 if ($action == "edit_product") {
     $old_id = $_POST['old_id'];
     $new_id = $_POST['new_id'];
@@ -422,6 +426,26 @@ function editUser($mysqli, $id, $username, $email, $full_name, $url, $telephone,
         return "SQL prepared incorrectly!";
     }
 }
+function deleteUser($mysqli, $id)
+{
+    $param_id = NULL;
+    $sql = "DELETE FROM users WHERE id=?";
+
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('i', $param_id);
+
+        $param_id = $id;
+
+        if ($stmt->execute()) {
+            return "Delete user successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
+    } else {
+        return "SQL prepared incorrectly!";
+    }
+}
+
 function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $detail)
 {
     $param_name = $param_profile = $param_email = $param_phone = $param_html = $param_css = $param_php = $param_javascript = $param_detail = $param_id = NULL;
@@ -463,13 +487,22 @@ function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $
         return "SQL prepared incorrectly!";
     }
 }
-/*function deleteUser($mysqli,$id)
+function deleteStaff($mysqli, $id)
 {
-    $sql = "DELETE FROM user WHERE id=1";
+    $param_id = NULL;
+    $sql = "DELETE FROM staff WHERE id=?";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Record deleted successfully";
+    if ($stmt = $mysqli->prepare($sql)) {
+        $stmt->bind_param('i', $param_id);
+
+        $param_id = $id;
+
+        if ($stmt->execute()) {
+            return "Delete staff successfully!";
+        } else {
+            return "SQL executed incorrectly!";
+        }
     } else {
-    echo "Error deleting record: " . $conn->error;
+        return "SQL prepared incorrectly!";
     }
-*/
+}

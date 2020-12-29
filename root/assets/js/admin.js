@@ -173,17 +173,7 @@ function checkEnter(e) {
         login();
     }
 }
-/*function deleteUser(){
-    var id = document.getElementById('id').value;
-    $.post(
-        "action.php",
-        { action: "delete_user", id: addressValue},
-        function (data, status) {
-            alert(data);
-            if (data == "Delete User successful!!!") window.location.href = "dashboard.php";
-        }
-    )
-}*/
+
 
 function editProduct(product_id_value) {
     var idValue = document.getElementById('id-edit-' + product_id_value).value;
@@ -236,6 +226,20 @@ function editUser() {
         }
     );
 }
+function deleteUser(user_id) {
+
+    if (confirm("Delete this User?")) {
+        $.post(
+            "action.php",
+            { action: "delete_user", id: user_id },
+            function (data, status) {
+                alert(data);
+                if (data == "Delete user successfully!")
+                    window.location.href = "user.php";
+            }
+        );
+    }
+}
 // edit staff
 function editStaff() {
     var id = document.getElementById("id-edit").value;
@@ -262,7 +266,20 @@ function editStaff() {
         }
     );
 }
+function deleteStaff(staff_id) {
 
+    if (confirm("Delete this Staff?")) {
+        $.post(
+            "action.php",
+            { action: "delete_staff", id: staff_id },
+            function (data, status) {
+                alert(data);
+                if (data == "Delete staff successfully!")
+                    window.location.href = "staff.php";
+            }
+        );
+    }
+}
 function addProduct() {
 
     if (validate("id") && validate("name") && validate('author') && validate('type') && validate('url') && validate('price')) {
