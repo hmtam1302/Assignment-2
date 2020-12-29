@@ -320,3 +320,15 @@ function validate(name) {
         return true;
     }
 }
+
+function deleteComment(comment_id){
+    $.post(
+        "action.php",
+        {action:"delete_comment", id:comment_id},
+        function(data, status){
+            alert(data);
+            if(data == "Delete comment successfully!")
+                window.location.href = "product.php";
+        }
+    )
+}

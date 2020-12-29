@@ -1,4 +1,5 @@
 <?php
+require_once "config.php";
 session_start();
 if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
@@ -127,7 +128,15 @@ if (!isset($_SESSION['admin'])) {
                     <p>
                         <i class="fas fa-comment"></i>
                     </p>
-                    <h3>50</h3>
+                    <?php
+                    $sql = "SELECT COUNT(id) FROM contact";
+                    $stmt = $mysqli->prepare($sql);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($number_contact);
+                    $stmt->fetch();
+                    ?>
+                    <h3><?php echo $number_contact ?></h3>
                     <p>Contacts</p>
                 </div>
             </div>
