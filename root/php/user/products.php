@@ -122,11 +122,13 @@
                                                             <span class="w-category">Price</span> - <span><?php echo $price; ?></span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="w-like">
-                                                            <button class="btn btn-rounded btn-outline-primary" onclick="directDetail(<?php echo $id ?>)"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
+                                                    <a href="detail.php?id=<?php echo $id; ?>">
+                                                        <div class="col-sm-4">
+                                                            <div class="w-like">
+                                                                <button class="btn btn-rounded btn-outline-primary"> <span class="fas fa-info" style="font-size: 24px; padding: 0 3px;"></span></button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
