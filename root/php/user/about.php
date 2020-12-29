@@ -71,101 +71,92 @@
         //Display staff information
         $sql = "SELECT * FROM staff";
 
-        if ($stmt = $mysqli->prepare($sql)) 
-            {
-                if ($stmt->execute()) 
-                {
-                    $stmt->store_result();
+        if ($stmt = $mysqli->prepare($sql)) {
+            if ($stmt->execute()) {
+                $stmt->store_result();
 
-                    $stmt->bind_result($id,$name,$profile,$email,$phone,$html,
-                    $css,$php,$javascript,$detail,$url);
-                                        
-                    while ($stmt->fetch()) 
-                    {
-                        ?>
-        <div class="container d-flex justify-content-center align-items-center section-mt-10 animate__animated animate__fadeInLeftBig">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="box-shadow-full">
+                $stmt->bind_result(
+                    $id,
+                    $name,
+                    $profile,
+                    $email,
+                    $phone,
+                    $html,
+                    $css,
+                    $php,
+                    $javascript,
+                    $detail,
+                    $url
+                );
+
+                while ($stmt->fetch()) {
+        ?>
+                    <div class="container d-flex justify-content-center align-items-center section-mt-10 animate__animated animate__fadeInLeftBig">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-5">
-                                        <div class="about-img">
-                                            <?php echo '<img src="' . $url .'" class="img-fluid rounded b-shadow-a" alt="">' ?>
+                            <div class="col-sm-12">
+                                <div class="box-shadow-full">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-5">
+                                                    <div class="about-img">
+                                                        <?php echo '<img src="' . $url . '" class="img-fluid rounded b-shadow-a" alt="">' ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-7">
+                                                    <div>
+                                                        <p><span class="title-s">Name: </span> <span><?php echo $name ?></span></p>
+                                                        <p><span class="title-s">Profile: </span> <span><?php echo $profile ?></span>
+                                                        </p>
+                                                        <p><span class="title-s">Email: </span>
+                                                            <span style="word-break: break-word"><?php echo $email ?></span></p>
+                                                        <p><span class="title-s">Phone: </span> <span><?php echo $phone ?></span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="skill-mf">
+                                                <p class="title-s">Skill</p>
+                                                <span>HTML</span> <span class="float-right"><?php echo $html ?>%</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width:<?php echo $html ?>%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span>CSS3</span> <span class="float-right"><?php echo $css ?>%</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $css ?>%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span>PHP</span> <span class="float-right"><?php echo $php ?>%</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $php ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span>JAVASCRIPT</span> <span class="float-right"><?php echo $javascript ?>%</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width:<?php echo $javascript ?>%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="pt-4 pt-md-0">
+                                                <div class="title-box-2">
+                                                    <h5 class="title-left">
+                                                        About me
+                                                    </h5>
+                                                </div>
+                                                <p class="lead">
+                                                    <?php echo $detail; ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 col-md-7">
-                                        <div>
-                                            <p><span class="title-s">Name: </span> <span><?php echo $name ?></span></p>
-                                            <p><span class="title-s">Profile: </span> <span><?php echo $profile ?></span>
-                                            </p>
-                                            <p><span class="title-s">Email: </span>
-                                                <span style="word-break: break-word"><?php echo $email ?></span></p>
-                                            <p><span class="title-s">Phone: </span> <span><?php echo $phone ?></span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="skill-mf">
-                                    <p class="title-s">Skill</p>
-                                    <span>HTML</span> <span class="float-right"><?php echo $html ?>%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width:<?php echo $html ?>%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>CSS3</span> <span class="float-right"><?php echo $css ?>%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $css ?>%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>PHP</span> <span class="float-right"><?php echo $php ?>%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $php ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span>JAVASCRIPT</span> <span class="float-right"><?php echo $javascript ?>%</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width:<?php echo $javascript ?>%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="pt-4 pt-md-0">
-                                    <div class="title-box-2">
-                                        <h5 class="title-left">
-                                            About me
-                                        </h5>
-                                    </div>
-                                    <p class="lead">
-                                        Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Curabitur
-                                        arcu erat, accumsan id
-                                        imperdiet et, porttitor
-                                        at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                                        Nulla
-                                        porttitor accumsan tincidunt.
-                                    </p>
-                                    <p class="lead">
-                                        Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus suscipit
-                                        tortor eget felis
-                                        porttitor volutpat. Vestibulum
-                                        ac diam sit amet quam vehicula elementum sed sit amet dui. porttitor at sem.
-                                    </p>
-                                    <p class="lead">
-                                        Nulla porttitor accumsan tincidunt. Quisque velit nisi, pretium ut lacinia in,
-                                        elementum id enim.
-                                        Nulla porttitor accumsan
-                                        tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
-                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
         <?php
-                    }
                 }
             }
+        }
         ?>
-        
+
     </section>
     <?php
     if (isset($_SESSION['username'])) {
