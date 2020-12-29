@@ -248,19 +248,20 @@ if ($action == "edit_staff") {
     $css = $_POST['css'];
     $php = $_POST['php'];
     $javascript = $_POST['javascript'];
+    $url = $_POST['url'];
     $detail = $_POST['detail'];
 
     $id = $_POST['id'];
-    echo editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $detail);
+    echo editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $url, $detail);
 }
-function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $detail)
+function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $url, $detail)
 {
-    $param_name = $param_profile = $param_email = $param_phone = $param_html = $param_css = $param_php = $param_javascript = $param_detail = $param_id = NULL;
-    $sql = "UPDATE staff SET name=?,profile=?, email=?,phone=?,html=?,css=?,php=?,javascript=?,detail=? where id=?";
+    $param_name = $param_profile = $param_email = $param_phone = $param_html = $param_css = $param_php = $param_javascript = $param_detail = $param_url = $param_id = NULL;
+    $sql = "UPDATE staff SET name=?,profile=?, email=?,phone=?,html=?,css=?,php=?,javascript=?,url=?,detail=? where id=?";
 
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param(
-            'ssssiiiisi',
+            'ssssiiiissi',
             $param_name,
             $param_profile,
             $param_email,
@@ -269,12 +270,12 @@ function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $
             $param_css,
             $param_php,
             $param_javascript,
+            $param_url,
             $param_detail,
-
             $param_id
         );
 
-        $param_username = $name;
+        $param_name = $name;
         $param_profile = $profile;
         $param_email = $email;
         $param_phone = $phone;
@@ -282,6 +283,7 @@ function editStaff($mysqli, $id, $name, $profile, $email, $phone, $html, $css, $
         $param_css = $css;
         $param_php = $php;
         $param_javascript = $javascript;
+        $param_url = $url;
         $param_detail = $detail;
 
         $param_id = $id;

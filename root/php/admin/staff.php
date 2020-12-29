@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "config.php";
+if (!isset($_SESSION['admin'])) {
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,7 +128,15 @@
                     <p>
                         <i class="fas fa-user-friends"></i>
                     </p>
-                    <h3>4</h3>
+                    <?php
+                    $sql = "SELECT COUNT(id) FROM staff";
+                    $stmt = $mysqli->prepare($sql);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($number_staff);
+                    $stmt->fetch();
+                    ?>
+                    <h3><?php echo $number_staff; ?></h3>
                     <p>Staff</p>
                 </div>
             </div>
@@ -146,48 +161,62 @@
                                 <th>CSS</th>
                                 <th>PHP</th>
                                 <th>JS</th>
+                                <th>URL</th>
                                 <th class="text-align:center">Detail</th>
                                 <th></th>
                                 <th></th>
                             </tr>
-                            
+
                             <?php
                             require_once "config.php";
 
-               
+
                             //Display all staff
                             $sql = "SELECT * FROM staff where 1";
 
-                            
+                            $staff = array();
 
                             if ($stmt = $mysqli->prepare($sql)) {
                                 if ($stmt->execute()) {
                                     $stmt->store_result();
-    
-                                    $stmt->bind_result($id, $name, $profile, $email, $phone,
-                                     $html,$css,$php,$javascript,$detail,$url);
+
+                                    $stmt->bind_result(
+                                        $id,
+                                        $name,
+                                        $profile,
+                                        $email,
+                                        $phone,
+                                        $html,
+                                        $css,
+                                        $php,
+                                        $javascript,
+                                        $detail,
+                                        $url
+                                    );
                                     while ($stmt->fetch()) {
+                                        array_push($staff, array($id, $name, $profile, $email, $phone, $html, $css, $php, $javascript, $url, $detail));
                             ?>
-                            <tr>
-                                <td><?php echo $id ?></td>
-                                <td><?php echo$name ?></td>
-                                <td><?php echo $profile ?></td>
-                                <td><?php echo $email ?></td>
-                                <td><?php echo $phone ?></td>
-                                <td><?php echo $html ?></td>
-                                <td><?php echo $css ?></td>
-                                <td><?php echo $php ?></td>
-                                <td><?php echo $javascript?></td>
-                                <td><?php echo $detail?></td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#staffEditModal">Edit</button></td>
-                                <td><button class="btn btn-danger" onclick="deleteStaff(<?php echo $id ?>)">Delete</button></td>
-                            </tr>
+                                        <tr>
+                                            <td><?php echo $id ?></td>
+                                            <td><?php echo $name ?></td>
+                                            <td><?php echo $profile ?></td>
+                                            <td><?php echo $email ?></td>
+                                            <td><?php echo $phone ?></td>
+                                            <td><?php echo $html ?></td>
+                                            <td><?php echo $css ?></td>
+                                            <td><?php echo $php ?></td>
+                                            <td><?php echo $javascript ?></td>
+                                            <td><?php echo $url ?></td>
+                                            <td><?php echo $detail ?></td>
+                                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#staffEditModal<?php echo $id ?>">Edit</button></td>
+                                            <td><button class="btn btn-danger" onclick="deleteStaff(<?php echo $id ?>)">Delete</button></td>
+                                        </tr>
                             <?php
+                                    }
                                 }
                             }
-                        }
                             ?>
-                               
+
                         </table>
                         <div class="col d-flex justify-content-end">
                             <button class="btn btn-outline-primary mx-3" data-toggle="modal" data-target="#staffModal">Add new staff</button>
@@ -198,7 +227,7 @@
         </div>
     </div>
 
-    <!-- Modal add user-->
+    <!-- Modal add staff-->
     <div class="modal fade" id="staffModal" tabindex="-1" role="dialog" aria-labelledby="staffModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -259,7 +288,7 @@
                             </div>
                             <span class="text-danger" id="cssErr"></span>
                         </div>
-                        
+
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="php" class="col-2 col-form-label"><strong>PHP</strong></label>
                             <div class="col-10">
@@ -285,96 +314,109 @@
     </div>
 
     <!-- Modal edit staff-->
-    <div class="modal fade" id="staffEditModal" tabindex="-1" role="dialog" aria-labelledby="staffEditModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Edit staff</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group row align-items-center">
-                            <label for="id-edit" class="col-2 col-form-label"><strong>ID</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="id-edit">
+    <?php
+    for ($index = 0; $index < count($staff); $index++) {
+    ?>
+        <div class="modal fade" id="staffEditModal<?php echo $staff[$index][0]; ?>" tabindex="-1" role="dialog" aria-labelledby="staffEditModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Edit staff</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row align-items-center">
+                                <label for="id-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>ID</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $staff[$index][0]; ?>" id="id-edit-<?php echo $staff[$index][0]; ?>" disabled>
+                                </div>
+                                <span class="text-danger" id="idErr"></span>
                             </div>
-                            <span class="text-danger" id="idErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="name-edit" class="col-2 col-form-label"><strong>Full name</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="name-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="name-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>Full name</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $staff[$index][1]; ?>" id="name-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="nameErr"></span>
                             </div>
-                            <span class="text-danger" id="nameErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="profile-edit" class="col-2 col-form-label"><strong>Profile</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="profile-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="profile-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>Profile</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $staff[$index][2]; ?>" id="profile-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="profileErr"></span>
                             </div>
-                            <span class="text-danger" id="profileErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="email-edit" class="col-2 col-form-label"><strong>Email</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="email" value="" id="email-edit">
+                            <div class="form-group row align-items-center">
+                                <label for="email-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>Email</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="email" value="<?php echo $staff[$index][3]; ?>" id="email-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="emailErr"></span>
                             </div>
-                            <span class="text-danger" id="emailErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="phone-edit" class="col-2 col-form-label"><strong>Phone</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="phone-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="phone-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>Phone</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="<?php echo $staff[$index][4]; ?>" id="phone-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="phoneErr"></span>
                             </div>
-                            <span class="text-danger" id="phoneErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="html-edit" class="col-2 col-form-label"><strong>HTML</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="number" min="0" max="100" value="" id="html-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="html-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>HTML</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="number" min="0" max="100" value="<?php echo $staff[$index][5]; ?>" id="html-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="htmlErr"></span>
                             </div>
-                            <span class="text-danger" id="htmlErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="css-edit" class="col-2 col-form-label"><strong>CSS</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="number" min="0" max="100" value="" id="css-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="css-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>CSS</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="number" min="0" max="100" value="<?php echo $staff[$index][6]; ?>" id="css-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="cssErr"></span>
                             </div>
-                            <span class="text-danger" id="cssErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="php-edit" class="col-2 col-form-label"><strong>PHP</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="number" min="0" max="100" value="" id="php-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="php-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>PHP</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="number" min="0" max="100" value="<?php echo $staff[$index][7]; ?>" id="php-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="phpErr"></span>
                             </div>
-                            <span class="text-danger" id="phpErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center justify-content-center">
-                            <label for="javascript-edit" class="col-2 col-form-label"><strong>Javascript</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="number" min="0" max="100" value="" id="javascript-edit">
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="javascript-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>Javascript</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="number" min="0" max="100" value="<?php echo $staff[$index][8]; ?>" id="javascript-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="phpErr"></span>
                             </div>
-                            <span class="text-danger" id="phpErr"></span>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="details-edit" class="col-2 col-form-label"><strong>Detail</strong></label>
-                            <div class="col-10">
-                                <textarea class="form-control" type="" value="" id="detail-edit"></textarea>
+                            <div class="form-group row align-items-center justify-content-center">
+                                <label for="url-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>URL</strong></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" min="0" max="100" value="<?php echo $staff[$index][9]; ?>" id="url-edit-<?php echo $staff[$index][0]; ?>">
+                                </div>
+                                <span class="text-danger" id="phpErr"></span>
                             </div>
-                            <span class="text-danger" id="detailErr"></span>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="editStaff()">Edit</button>
+                            <div class="form-group row align-items-center">
+                                <label for="details-edit-<?php echo $staff[$index][0]; ?>" class="col-2 col-form-label"><strong>Detail</strong></label>
+                                <div class="col-10">
+                                    <textarea class="form-control" type="" id="detail-edit-<?php echo $staff[$index][0]; ?>"><?php echo $staff[$index][10]; ?></textarea>
+                                </div>
+                                <span class="text-danger" id="detailErr"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="editStaff(<?php echo $staff[$index][0]; ?>)">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
     <!-- end main content -->
     <!-- import script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>

@@ -210,13 +210,13 @@ function deleteProduct(product_id) {
 }
 // edit user name in user.php
 function editUser(user_id) {
-    var id = document.getElementById("id-edit-"+user_id).value;
-    var username = document.getElementById("username-edit-"+user_id).value;
-    var email = document.getElementById("email-edit-"+user_id).value;
-    var full_name = document.getElementById("full-name-edit-"+user_id).value;
-    var url = document.getElementById("url-edit-"+user_id).value;
-    var telephone = document.getElementById("telephone-edit-"+user_id).value;
-    var date_of_birth = document.getElementById("birthday-edit-"+user_id).value;
+    var id = document.getElementById("id-edit-" + user_id).value;
+    var username = document.getElementById("username-edit-" + user_id).value;
+    var email = document.getElementById("email-edit-" + user_id).value;
+    var full_name = document.getElementById("full-name-edit-" + user_id).value;
+    var url = document.getElementById("url-edit-" + user_id).value;
+    var telephone = document.getElementById("telephone-edit-" + user_id).value;
+    var date_of_birth = document.getElementById("birthday-edit-" + user_id).value;
     $.post(
         "action.php",
         { action: "edit_user", id: id, username: username, email: email, fullname: full_name, url: url, telephone: telephone, date_of_birth: date_of_birth },
@@ -241,24 +241,25 @@ function deleteUser(user_id) {
     }
 }
 // edit staff
-function editStaff() {
-    var id = document.getElementById("id-edit").value;
-    var name = document.getElementById("name-edit").value;
-    var profile = document.getElementById("profile-edit").value;
-    var email = document.getElementById("email-edit").value;
-    var phone = document.getElementById("phone-edit").value;
-    var html = document.getElementById("html-edit").value;
-    var css = document.getElementById("css-edit").value;
-    var php = document.getElementById("php-edit").value;
-    var javascript = document.getElementById("javascript-edit").value;
-    var detail = document.getElementById("detail-edit").value;
+function editStaff(staff_id) {
+    var id = document.getElementById("id-edit-" + staff_id).value;
+    var name = document.getElementById("name-edit-" + staff_id).value;
+    var profile = document.getElementById("profile-edit-" + staff_id).value;
+    var email = document.getElementById("email-edit-" + staff_id).value;
+    var phone = document.getElementById("phone-edit-" + staff_id).value;
+    var html = document.getElementById("html-edit-" + staff_id).value;
+    var css = document.getElementById("css-edit-" + staff_id).value;
+    var php = document.getElementById("php-edit-" + staff_id).value;
+    var javascript = document.getElementById("javascript-edit-" + staff_id).value;
+    var url = document.getElementById("url-edit-" + staff_id).value;
+    var detail = document.getElementById("detail-edit-" + staff_id).value;
 
     $.post(
         "action.php",
         {
             action: "edit_staff",
             id: id, name: name, profile: profile, email: email, phone: phone,
-            html: html, css: css, php: php, javascript: javascript, detail: detail
+            html: html, css: css, php: php, javascript: javascript, url: url, detail: detail
         },
         function (data, status) {
             alert(data);
@@ -321,13 +322,13 @@ function validate(name) {
     }
 }
 
-function deleteComment(comment_id){
+function deleteComment(comment_id) {
     $.post(
         "action.php",
-        {action:"delete_comment", id:comment_id},
-        function(data, status){
+        { action: "delete_comment", id: comment_id },
+        function (data, status) {
             alert(data);
-            if(data == "Delete comment successfully!")
+            if (data == "Delete comment successfully!")
                 window.location.href = "product.php";
         }
     )
