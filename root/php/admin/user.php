@@ -228,11 +228,6 @@ if (!isset($_SESSION['admin'])) {
                 <div class="modal-body">
                     <form>
                         <div class="form-group row align-items-center">
-                            <label for="id" class="col-2 col-form-label"><strong>ID</strong></label>
-                            <div class="col-10">
-                                <input class="form-control" type="text" value="" id="id">
-                            </div>
-                            <span class="text-danger" id="idErr"></span>
                         </div>
                         <div class="form-group row align-items-center justify-content-center">
                             <label for="username" class="col-2 col-form-label"><strong>Username</strong></label>

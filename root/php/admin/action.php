@@ -549,3 +549,38 @@ function deleteComment($mysqli, $id)
     }
 }
 ///////////////////////////////
+
+
+//Add user
+if ($action == "add_user"){
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $full_name = $_POST['full_name'];
+    $url = $_POST['url'];
+    $phone = $_POST['telephone'];
+    $birthday = $_POST['birthday'];
+
+    echo addUser($mysqli, $username, $email, $full_name, $url, $phone, $birthday);
+}
+
+function addUser($mysqli, $username, $email, $full_name, $url, $phone, $birthday){
+    $param_username= $param_email=$param_fullname= $param_url= $param_telephone= $param_birthday = NULL;
+    $sql = "INSERT INTO users (username, email, full_name,url,telephone,date_of_birth) VALUES (?,?,?,?,?,?)";
+
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('ssssss', $param_username, $param_email, $param_fullname, $param_url, $param_telephone, $param_birthday);
+
+    $param_username = $username;
+    $param_email = $email;
+    $param_fullname = $full_name;
+    $param_url = $url;
+    $param_telephone = $phone;
+    $param_birthday = $birthday;
+
+    if ($stmt->execute()){
+        return "Add new user successfully!";
+    }
+    else{
+        "SQL executed incorrectly!";
+    }
+}

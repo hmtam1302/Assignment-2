@@ -333,3 +333,30 @@ function deleteComment(comment_id) {
         }
     )
 }
+
+function addUser() {
+    var username = document.getElementById('username').value;
+    var email = document.getElementById('email').value;
+    var full_name = document.getElementById('full-name').value;
+    var url = document.getElementById('url').value;
+    var telephone = document.getElementById('telephone').value;
+    var birthday = document.getElementById('birthday').value;
+
+    $.post(
+        "action.php",
+        {
+            action: "add_user",
+            username: username,
+            email:email,
+            full_name:full_name,
+            url:url,
+            telephone:telephone,
+            birthday:birthday
+        },
+        function(data, status){
+            alert(data);
+            if(data == "Add new user successfully!")
+                window.location.href = "user.php";
+        }
+    )
+}
